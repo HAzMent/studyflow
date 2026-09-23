@@ -1,0 +1,30 @@
+services:
+
+  - type: web
+    name: studyflow
+    runtime: node
+
+    buildCommand: npm ci
+
+    startCommand: npm start
+
+    healthCheckPath: /api/health
+
+    autoDeploy: true
+
+    envVars:
+
+      - key: NODE_ENV
+        value: production
+
+      - key: SESSION_SECRET
+        sync: false
+
+      - key: OPENAI_API_KEY
+        sync: false
+
+      - key: SUPABASE_URL
+        sync: false
+
+      - key: SUPABASE_SECRET_KEY
+        sync: false

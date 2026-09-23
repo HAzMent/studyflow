@@ -1,0 +1,3570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<base href="/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StudyFlow</title>
+<link rel="stylesheet" href="style.css">
+
+<link rel="manifest" href="/manifest.webmanifest">
+
+<meta name="theme-color" content="#635bff">
+
+<meta
+  name="apple-mobile-web-app-capable"
+  content="yes"
+>
+
+<meta
+  name="apple-mobile-web-app-status-bar-style"
+  content="default"
+>
+
+<meta
+  name="apple-mobile-web-app-title"
+  content="StudyFlow"
+>
+
+<link
+  rel="apple-touch-icon"
+  href="/studyflow-icon.svg"
+>
+
+</head>
+
+<body>
+
+<div id="authScreen" class="auth-screen">
+  <div class="auth-brand">
+    <div class="brand-icon">🎓</div>
+    <h1>StudyFlow</h1>
+    <p>Your smarter student workspace.</p>
+  </div>
+
+  <div class="auth-card">
+    <div class="auth-tabs">
+      <button id="loginTab" class="auth-tab active">Login</button>
+      <button id="registerTab" class="auth-tab">Create account</button>
+    </div>
+
+    <div id="loginForm">
+      <h2>Welcome back 👋</h2>
+      <input id="loginEmail" type="email" placeholder="Email">
+      <input id="loginPassword" type="password" placeholder="Password">
+      <button class="primary full" onclick="login()">Login</button>
+      <p id="loginError" class="error"></p>
+    </div>
+
+    <div id="registerForm" class="hidden">
+      <h2>Create account 🚀</h2>
+      <input id="registerName" placeholder="Your name">
+      <input id="registerEmail" type="email" placeholder="Email">
+      <input id="registerPassword" type="password" placeholder="Password">
+      <button class="primary full" onclick="register()">Create account</button>
+      <p id="registerError" class="error"></p>
+    </div>
+  </div>
+</div>
+
+<div id="app" class="hidden">
+
+<aside>
+  <div class="logo">🎓 <span>StudyFlow</span></div>
+
+  <nav>
+    <button class="nav active" data-page="dashboard">🏠 Dashboard</button>
+    <button class="nav" data-page="classes">📚 Classes</button>
+    <button class="nav" data-page="tasks">✅ Tasks</button>
+      <button class="nav" data-page="planner">🧠 Study Planner</button>
+    <button class="nav" data-page="calendar">📅 Calendar</button>
+      <button class="nav" data-page="degree">🎓 Degree Planner</button>
+      <button class="nav" data-page="semester">🗓 Semester Planner</button>
+      <button class="nav" data-page="attendance">🙋 Attendance</button>
+      <button class="nav" data-page="overview">📆 Weekly Overview</button>
+      <button class="nav" data-page="analytics">📈 Analytics</button>
+    <button class="nav" data-page="grades">📊 Grades</button>
+      <button class="nav" data-page="predictor">🎯 Grade Predictor</button>
+    <button class="nav" data-page="notes">📝 Notes</button>
+      <button class="nav" data-page="flashcards">🧠 Flashcards</button>
+    <button class="nav" data-page="ai">✨ AI Tutor</button>
+      <button class="nav" data-page="aiPower">⚡ AI Power Lab</button>
+    <button class="nav" data-page="timer">⏱ Focus</button>
+    <button class="nav" onclick="location.href='/syllabus.html'">📄 Syllabus AI</button>
+      <button class="nav" data-page="profile">👤 Profile</button>
+      <button class="nav" data-page="cloudSync">☁️ Cloud Sync</button>
+      <button class="nav" data-page="settings">⚙️ Settings</button>
+  </nav>
+
+  <button class="logout" onclick="logout()">↪ Logout</button>
+</aside>
+
+<main>
+
+<!-- DASHBOARD -->
+
+<section id="dashboard" class="page active-page">
+
+<header>
+  <div>
+    <p class="eyebrow">STUDENT WORKSPACE</p>
+    <h1 id="welcomeTitle">Welcome 👋</h1>
+    <p class="muted">Stay organized. Study smarter.</p>
+  </div>
+
+  <div id="avatar" class="avatar">S</div>
+</header>
+
+<div class="stats">
+
+  <div class="stat">
+    <span>📚</span>
+    <div>
+      <h2 id="classCount">0</h2>
+      <p>Classes</p>
+    </div>
+  </div>
+
+  <div class="stat">
+    <span>📌</span>
+    <div>
+      <h2 id="taskCount">0</h2>
+      <p>Open Tasks</p>
+    </div>
+  </div>
+
+  <div class="stat">
+    <span>✅</span>
+    <div>
+      <h2 id="doneCount">0</h2>
+      <p>Completed</p>
+    </div>
+  </div>
+
+  <div class="stat">
+    <span>📊</span>
+    <div>
+      <h2 id="dashboardGrade">—</h2>
+      <p>Average Grade</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="dashboard-grid">
+
+  <div class="panel">
+    <div class="panel-head">
+      <div>
+        <h2>Upcoming</h2>
+        <p class="muted">Your closest deadlines.</p>
+      </div>
+
+      <button onclick="showPage('tasks')">View tasks</button>
+    </div>
+
+    <div id="dashboardTasks"></div>
+  </div>
+
+  <div class="panel ai-preview">
+    <div class="big-icon">✨</div>
+    <h2>StudyFlow AI</h2>
+
+    <p class="muted">
+      Explain topics, create practice questions and help you study.
+    </p>
+
+    <button onclick="showPage('ai')">
+      Ask AI →
+    </button>
+  </div>
+
+</div>
+
+</section>
+
+<!-- CLASSES -->
+
+<section id="classes" class="page">
+
+<div class="page-head">
+  <div>
+    <h1>Classes</h1>
+    <p class="muted">Manage your semester courses.</p>
+  </div>
+</div>
+
+<div class="panel form-grid">
+  <input id="className" placeholder="Course name">
+  <input id="classProfessor" placeholder="Professor">
+  <input id="classRoom" placeholder="Room / Online">
+
+  <button onclick="addClass()">+ Add Class</button>
+</div>
+
+<div id="classesList" class="cards-grid"></div>
+
+</section>
+
+<!-- TASKS -->
+
+<section id="tasks" class="page">
+
+<div class="page-head">
+  <div>
+    <h1>Tasks</h1>
+    <p class="muted">Homework, exams, projects and deadlines.</p>
+  </div>
+</div>
+
+<div class="panel task-form">
+
+  <input id="taskName" placeholder="Task name">
+
+  <select id="taskClass">
+    <option value="">Select class</option>
+  </select>
+
+  <input id="taskDate" type="date">
+
+  <select id="taskPriority">
+    <option value="Low">Low priority</option>
+    <option value="Medium" selected>Medium priority</option>
+    <option value="High">High priority</option>
+  </select>
+
+  <button onclick="addTask()">+ Add Task</button>
+
+</div>
+
+<div class="task-board">
+
+  <div class="task-column">
+    <div class="column-title">
+      <span>📌 To Do</span>
+      <span id="todoBadge" class="badge">0</span>
+    </div>
+
+    <div id="todoTasks"></div>
+  </div>
+
+  <div class="task-column">
+    <div class="column-title">
+      <span>⚡ In Progress</span>
+      <span id="progressBadge" class="badge">0</span>
+    </div>
+
+    <div id="progressTasks"></div>
+  </div>
+
+  <div class="task-column">
+    <div class="column-title">
+      <span>✅ Done</span>
+      <span id="doneBadge" class="badge">0</span>
+    </div>
+
+    <div id="doneTasks"></div>
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- STUDY PLANNER -->
+
+<section id="planner" class="page">
+
+<div class="page-head">
+  <div>
+    <p class="eyebrow">AI STUDY PLANNER</p>
+    <h1>Smart Study Planner 🧠</h1>
+    <p class="muted">
+      Turn your assignments and deadlines into a realistic 7-day study plan.
+    </p>
+  </div>
+</div>
+
+<div class="planner-layout">
+
+  <div class="panel planner-settings">
+
+    <h2>Create your plan</h2>
+
+    <p class="muted planner-description">
+      StudyFlow will use your open tasks, deadlines and priorities.
+    </p>
+
+    <label>How many hours can you study per day?</label>
+
+    <select id="plannerHours">
+      <option value="1">1 hour</option>
+      <option value="2" selected>2 hours</option>
+      <option value="3">3 hours</option>
+      <option value="4">4 hours</option>
+      <option value="5">5 hours</option>
+      <option value="6">6 hours</option>
+    </select>
+
+
+    <label>Preferred study session</label>
+
+    <select id="plannerSession">
+      <option value="25">25 minutes</option>
+      <option value="45" selected>45 minutes</option>
+      <option value="60">60 minutes</option>
+      <option value="90">90 minutes</option>
+    </select>
+
+
+    <label>Study style</label>
+
+    <select id="plannerStyle">
+      <option value="balanced" selected>
+        Balanced
+      </option>
+
+      <option value="deadline">
+        Focus on closest deadlines
+      </option>
+
+      <option value="difficult">
+        Hardest work first
+      </option>
+
+      <option value="light">
+        Lighter daily workload
+      </option>
+    </select>
+
+
+    <label>Anything else?</label>
+
+    <textarea
+      id="plannerNotes"
+      placeholder="Example: I do not want to study after 9 PM..."
+    ></textarea>
+
+
+    <button
+      id="generatePlanButton"
+      onclick="generateStudyPlan()"
+    >
+      ✨ Generate My Study Plan
+    </button>
+
+
+    <p
+      id="plannerError"
+      class="planner-error"
+    ></p>
+
+  </div>
+
+
+  <div class="panel planner-summary">
+
+    <p class="eyebrow">
+      YOUR WORKLOAD
+    </p>
+
+    <div class="planner-stat">
+      <strong id="plannerOpenTasks">0</strong>
+      <span>Open tasks</span>
+    </div>
+
+    <div class="planner-stat">
+      <strong id="plannerHighPriority">0</strong>
+      <span>High priority</span>
+    </div>
+
+    <div class="planner-stat">
+      <strong id="plannerDeadlines">0</strong>
+      <span>With deadlines</span>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div
+  id="plannerLoading"
+  class="panel planner-loading hidden"
+>
+
+  <div class="planner-spinner"></div>
+
+  <div>
+    <strong>Building your week...</strong>
+
+    <p>
+      StudyFlow AI is balancing deadlines,
+      priorities and study time.
+    </p>
+  </div>
+
+</div>
+
+
+<div
+  id="plannerResult"
+  class="panel planner-result hidden"
+>
+
+  <div class="planner-result-head">
+
+    <div>
+      <p class="eyebrow">YOUR 7-DAY PLAN</p>
+      <h2>Study Schedule</h2>
+    </div>
+
+    <div class="planner-actions">
+
+      <button
+        class="secondary"
+        onclick="clearStudyPlan()"
+      >
+        Clear
+      </button>
+
+      <button
+        onclick="generateStudyPlan()"
+      >
+        ↻ Regenerate
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div
+    id="plannerText"
+    class="planner-text"
+  ></div>
+
+</div>
+
+</section>
+
+
+
+
+<!-- =====================================================
+     DEGREE PLANNER
+===================================================== -->
+
+<section id="degree" class="page">
+
+<div class="page-head">
+
+  <div>
+    <p class="eyebrow">DEGREE PROGRESS</p>
+    <h1>Degree Planner 🎓</h1>
+    <p class="muted">
+      Track credits, requirements and your path to graduation.
+    </p>
+  </div>
+
+</div>
+
+
+<div class="degree-stats">
+
+  <div class="stat">
+    <span>🎓</span>
+
+    <div>
+      <h2 id="degreeCompletedCredits">0</h2>
+      <p>Credits completed</p>
+    </div>
+  </div>
+
+
+  <div class="stat">
+    <span>📘</span>
+
+    <div>
+      <h2 id="degreeRemainingCredits">120</h2>
+      <p>Credits remaining</p>
+    </div>
+  </div>
+
+
+  <div class="stat">
+    <span>✅</span>
+
+    <div>
+      <h2 id="degreeCompletedCourses">0</h2>
+      <p>Courses completed</p>
+    </div>
+  </div>
+
+
+  <div class="stat">
+    <span>📊</span>
+
+    <div>
+      <h2 id="degreePercent">0%</h2>
+      <p>Degree progress</p>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="degree-layout">
+
+  <div>
+
+    <div class="panel degree-settings">
+
+      <h2>Degree Settings</h2>
+
+      <div class="two-fields">
+
+        <div>
+          <label>Degree / Major</label>
+
+          <input
+            id="degreeMajor"
+            placeholder="Computer Science"
+          >
+        </div>
+
+
+        <div>
+          <label>Total credits required</label>
+
+          <input
+            id="degreeTotalCredits"
+            type="number"
+            min="1"
+            value="120"
+          >
+        </div>
+
+      </div>
+
+      <button onclick="saveDegreeSettings()">
+        Save Degree Settings
+      </button>
+
+    </div>
+
+
+    <div class="panel degree-add">
+
+      <h2>Add Requirement</h2>
+
+      <div class="degree-add-grid">
+
+        <input
+          id="degreeCourseCode"
+          placeholder="Course code"
+        >
+
+        <input
+          id="degreeCourseName"
+          placeholder="Course name"
+        >
+
+        <input
+          id="degreeCourseCredits"
+          type="number"
+          min="1"
+          value="4"
+          placeholder="Credits"
+        >
+
+        <select id="degreeCourseCategory">
+          <option value="Major">Major Requirement</option>
+          <option value="General Education">General Education</option>
+          <option value="Elective">Elective</option>
+          <option value="Math/Science">Math / Science</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <button onclick="addDegreeCourse()">
+          + Add
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div id="degreeCourseList"></div>
+
+  </div>
+
+
+  <div class="panel degree-side">
+
+    <p class="eyebrow">PROGRESS</p>
+
+    <div class="degree-ring-wrap">
+
+      <div
+        id="degreeRing"
+        class="degree-ring"
+      >
+
+        <div>
+          <strong id="degreeRingPercent">
+            0%
+          </strong>
+
+          <span>
+            complete
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="degree-progress-bar">
+      <div id="degreeProgressFill"></div>
+    </div>
+
+
+    <div class="degree-summary-row">
+
+      <span>Completed</span>
+
+      <strong id="degreeSummaryCompleted">
+        0 credits
+      </strong>
+
+    </div>
+
+
+    <div class="degree-summary-row">
+
+      <span>Remaining</span>
+
+      <strong id="degreeSummaryRemaining">
+        120 credits
+      </strong>
+
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     SEMESTER PLANNER
+===================================================== -->
+
+<section id="semester" class="page">
+
+<div class="page-head">
+
+  <div>
+    <p class="eyebrow">COURSE PLANNING</p>
+    <h1>Semester Planner 🗓</h1>
+    <p class="muted">
+      Plan courses across Fall, Winter and Summer.
+    </p>
+  </div>
+
+</div>
+
+
+<div class="panel semester-form">
+
+  <input
+    id="semesterCourse"
+    placeholder="Course name"
+  >
+
+  <input
+    id="semesterCredits"
+    type="number"
+    value="4"
+    min="1"
+    placeholder="Credits"
+  >
+
+  <select id="semesterTerm">
+    <option value="Fall 2026">Fall 2026</option>
+    <option value="Winter 2027">Winter 2027</option>
+    <option value="Summer 2027">Summer 2027</option>
+    <option value="Fall 2027">Fall 2027</option>
+    <option value="Winter 2028">Winter 2028</option>
+  </select>
+
+  <select id="semesterDifficulty">
+    <option value="Easy">Easy</option>
+    <option value="Medium" selected>Medium</option>
+    <option value="Hard">Hard</option>
+  </select>
+
+  <button onclick="addSemesterCourse()">
+    + Add Course
+  </button>
+
+</div>
+
+
+<div
+  id="semesterBoards"
+  class="semester-board"
+></div>
+
+</section>
+
+
+<!-- =====================================================
+     ATTENDANCE
+===================================================== -->
+
+<section id="attendance" class="page">
+
+<div class="page-head">
+
+  <div>
+    <p class="eyebrow">COURSE TRACKER</p>
+    <h1>Attendance 🙋</h1>
+    <p class="muted">
+      Keep track of absences before they become a problem.
+    </p>
+  </div>
+
+</div>
+
+
+<div class="panel attendance-form">
+
+  <select id="attendanceClass">
+    <option value="">
+      Select class
+    </option>
+  </select>
+
+  <input
+    id="attendanceLimit"
+    type="number"
+    min="1"
+    value="4"
+    placeholder="Allowed absences"
+  >
+
+  <button onclick="addAttendanceClass()">
+    Add Tracker
+  </button>
+
+</div>
+
+
+<div
+  id="attendanceList"
+  class="attendance-grid"
+></div>
+
+</section>
+
+
+<!-- =====================================================
+     WEEKLY OVERVIEW
+===================================================== -->
+
+<section id="overview" class="page">
+
+<div class="page-head">
+
+  <div>
+    <p class="eyebrow">THIS WEEK</p>
+    <h1>Weekly Overview 📆</h1>
+    <p class="muted">
+      See your workload for the next seven days.
+    </p>
+  </div>
+
+</div>
+
+
+<div class="overview-top">
+
+  <div class="stat">
+
+    <span>📌</span>
+
+    <div>
+      <h2 id="overviewTasks">0</h2>
+      <p>Tasks this week</p>
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <span>🔥</span>
+
+    <div>
+      <h2 id="overviewHigh">0</h2>
+      <p>High priority</p>
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <span>⏱</span>
+
+    <div>
+      <h2 id="overviewFocus">0m</h2>
+      <p>Focus time</p>
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <span>⭐</span>
+
+    <div>
+      <h2 id="overviewXP">0</h2>
+      <p>Study XP</p>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div
+  id="weekDays"
+  class="week-grid"
+></div>
+
+</section>
+
+
+<!-- =====================================================
+     ANALYTICS
+===================================================== -->
+
+<section id="analytics" class="page">
+
+<div class="page-head">
+
+  <div>
+    <p class="eyebrow">PERFORMANCE</p>
+    <h1>Study Analytics 📈</h1>
+    <p class="muted">
+      Understand your workload and study habits.
+    </p>
+  </div>
+
+</div>
+
+
+<div class="analytics-grid">
+
+  <div class="panel">
+
+    <p class="eyebrow">
+      PRODUCTIVITY
+    </p>
+
+    <div class="analytics-big">
+      <strong id="analyticsCompleted">0%</strong>
+      <span>task completion</span>
+    </div>
+
+    <div class="analytics-track">
+      <div id="analyticsTaskBar"></div>
+    </div>
+
+  </div>
+
+
+  <div class="panel">
+
+    <p class="eyebrow">
+      FOCUS
+    </p>
+
+    <div class="analytics-big">
+      <strong id="analyticsMinutes">0</strong>
+      <span>minutes studied</span>
+    </div>
+
+  </div>
+
+
+  <div class="panel">
+
+    <p class="eyebrow">
+      STREAK
+    </p>
+
+    <div class="analytics-big">
+      <strong id="analyticsStreak">1</strong>
+      <span>day streak</span>
+    </div>
+
+  </div>
+
+
+  <div class="panel">
+
+    <p class="eyebrow">
+      LEVEL
+    </p>
+
+    <div class="analytics-big">
+      <strong id="analyticsLevel">1</strong>
+      <span>student level</span>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="analytics-bottom">
+
+  <div class="panel">
+
+    <h2>Course workload</h2>
+
+    <div
+      id="courseAnalytics"
+      class="course-analytics"
+    ></div>
+
+  </div>
+
+
+  <div class="panel">
+
+    <h2>XP Progress</h2>
+
+    <p
+      id="xpText"
+      class="muted"
+    >
+      0 / 500 XP
+    </p>
+
+    <div class="xp-track">
+      <div id="xpFill"></div>
+    </div>
+
+
+    <div class="xp-info">
+
+      <div>
+        <strong>+20 XP</strong>
+        <span>Complete task</span>
+      </div>
+
+      <div>
+        <strong>+50 XP</strong>
+        <span>Focus session</span>
+      </div>
+
+      <div>
+        <strong>+10 XP</strong>
+        <span>Add study note</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- CALENDAR -->
+
+<section id="calendar" class="page">
+
+<div class="calendar-header">
+
+  <div>
+    <h1>Calendar</h1>
+    <p class="muted">Your assignments and deadlines.</p>
+  </div>
+
+  <div class="calendar-controls">
+    <button class="secondary" onclick="changeMonth(-1)">←</button>
+
+    <h2 id="calendarTitle"></h2>
+
+    <button class="secondary" onclick="changeMonth(1)">→</button>
+
+    <button onclick="goToday()">Today</button>
+  </div>
+
+</div>
+
+<div class="calendar-shell">
+
+  <div class="weekdays">
+    <div>Sun</div>
+    <div>Mon</div>
+    <div>Tue</div>
+    <div>Wed</div>
+    <div>Thu</div>
+    <div>Fri</div>
+    <div>Sat</div>
+  </div>
+
+  <div id="calendarGrid" class="calendar-grid"></div>
+
+</div>
+
+</section>
+
+<!-- GRADES -->
+
+<section id="grades" class="page">
+
+<div class="page-head">
+  <div>
+    <h1>Grades</h1>
+    <p class="muted">Track grades across your courses.</p>
+  </div>
+</div>
+
+<div class="grade-layout">
+
+  <div>
+
+    <div class="panel grade-form">
+
+      <select id="gradeClass">
+        <option value="">Select class</option>
+      </select>
+
+      <input id="gradeAssignment" placeholder="Assignment / Exam">
+
+      <input
+        id="gradeEarned"
+        type="number"
+        min="0"
+        placeholder="Points earned"
+      >
+
+      <input
+        id="gradePossible"
+        type="number"
+        min="1"
+        placeholder="Points possible"
+      >
+
+      <button onclick="addGrade()">Add Grade</button>
+
+    </div>
+
+    <div id="gradesList"></div>
+
+  </div>
+
+  <div class="panel grade-summary">
+
+    <p class="eyebrow">OVERALL</p>
+
+    <div id="overallPercent" class="big-grade">—</div>
+
+    <p id="overallLetter" class="grade-letter">No grades yet</p>
+
+    <div class="grade-bar">
+      <div id="gradeBarFill"></div>
+    </div>
+
+    <h3>Class averages</h3>
+
+    <div id="classAverages"></div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- GRADE PREDICTOR -->
+
+<section id="predictor" class="page">
+
+<div class="page-head">
+  <div>
+    <h1>Grade Predictor 🎯</h1>
+    <p class="muted">
+      Find out what score you need on your final exam.
+    </p>
+  </div>
+</div>
+
+<div class="predictor-layout">
+
+  <div class="panel predictor-card">
+
+    <p class="eyebrow">TARGET CALCULATOR</p>
+
+    <h2>What do I need on my final?</h2>
+
+    <div class="predictor-form">
+
+      <label>Current grade</label>
+
+      <div class="percent-input">
+        <input
+          id="predictCurrent"
+          type="number"
+          min="0"
+          max="100"
+          step="0.1"
+          placeholder="Example: 82"
+        >
+        <span>%</span>
+      </div>
+
+
+      <label>Final exam weight</label>
+
+      <div class="percent-input">
+        <input
+          id="predictWeight"
+          type="number"
+          min="1"
+          max="100"
+          step="0.1"
+          placeholder="Example: 25"
+        >
+        <span>%</span>
+      </div>
+
+
+      <label>Desired final course grade</label>
+
+      <div class="percent-input">
+        <input
+          id="predictTarget"
+          type="number"
+          min="0"
+          max="100"
+          step="0.1"
+          placeholder="Example: 85"
+        >
+        <span>%</span>
+      </div>
+
+
+      <button onclick="calculateNeededFinal()">
+        Calculate Needed Score
+      </button>
+
+    </div>
+
+
+    <div
+      id="neededResult"
+      class="predictor-result hidden"
+    >
+
+      <p>You need</p>
+
+      <div id="neededScore" class="predictor-number">
+        —
+      </div>
+
+      <h3 id="neededMessage"></h3>
+
+      <div class="predictor-bar">
+
+        <div id="neededBar"></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="panel predictor-card">
+
+    <p class="eyebrow">FINAL GRADE ESTIMATOR</p>
+
+    <h2>What will my final grade be?</h2>
+
+    <div class="predictor-form">
+
+      <label>Current grade</label>
+
+      <div class="percent-input">
+        <input
+          id="estimateCurrent"
+          type="number"
+          min="0"
+          max="100"
+          step="0.1"
+          placeholder="Example: 82"
+        >
+        <span>%</span>
+      </div>
+
+
+      <label>Final exam weight</label>
+
+      <div class="percent-input">
+        <input
+          id="estimateWeight"
+          type="number"
+          min="1"
+          max="100"
+          step="0.1"
+          placeholder="Example: 25"
+        >
+        <span>%</span>
+      </div>
+
+
+      <label>Expected final exam score</label>
+
+      <div class="percent-input">
+        <input
+          id="estimateFinal"
+          type="number"
+          min="0"
+          max="100"
+          step="0.1"
+          placeholder="Example: 90"
+        >
+        <span>%</span>
+      </div>
+
+
+      <button onclick="calculateFinalGrade()">
+        Predict Final Grade
+      </button>
+
+    </div>
+
+
+    <div
+      id="estimateResult"
+      class="predictor-result hidden"
+    >
+
+      <p>Predicted course grade</p>
+
+      <div id="estimatedGrade" class="predictor-number">
+        —
+      </div>
+
+      <h3 id="estimatedLetter"></h3>
+
+      <div class="predictor-bar">
+
+        <div id="estimateBar"></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="panel quick-targets">
+
+  <div>
+    <p class="eyebrow">QUICK TARGETS</p>
+
+    <h2>Common grade goals</h2>
+
+    <p class="muted">
+      Click one to automatically use it as your target.
+    </p>
+  </div>
+
+
+  <div class="target-buttons">
+
+    <button onclick="setTarget(93)">
+      A · 93%
+    </button>
+
+    <button onclick="setTarget(90)">
+      A− · 90%
+    </button>
+
+    <button onclick="setTarget(87)">
+      B+ · 87%
+    </button>
+
+    <button onclick="setTarget(83)">
+      B · 83%
+    </button>
+
+    <button onclick="setTarget(80)">
+      B− · 80%
+    </button>
+
+    <button onclick="setTarget(73)">
+      C · 73%
+    </button>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- NOTES -->
+
+<section id="notes" class="page">
+
+<div class="page-head">
+  <div>
+    <h1>Notes</h1>
+    <p class="muted">Keep class notes organized.</p>
+  </div>
+</div>
+
+<div class="panel notes-form">
+
+  <input id="noteTitle" placeholder="Note title">
+
+  <select id="noteClass">
+    <option value="">General</option>
+  </select>
+
+  <textarea
+    id="noteText"
+    placeholder="Write your notes..."
+  ></textarea>
+
+  <button onclick="addNote()">Save Note</button>
+
+</div>
+
+<div id="notesList" class="cards-grid"></div>
+
+</section>
+
+
+<!-- FLASHCARDS -->
+
+<section id="flashcards" class="page">
+
+<div class="page-head">
+  <div>
+    <p class="eyebrow">AI STUDY TOOLS</p>
+    <h1>AI Flashcards 🧠</h1>
+    <p class="muted">
+      Turn your notes into flashcards and study them instantly.
+    </p>
+  </div>
+</div>
+
+
+<div class="flashcards-layout">
+
+  <!-- CREATE -->
+  <div class="panel">
+
+    <h2>Create Flashcards</h2>
+
+    <p class="muted flash-description">
+      Choose one of your notes or paste study material below.
+    </p>
+
+
+    <label class="flash-label">
+      Use one of my notes
+    </label>
+
+    <select id="flashNoteSelect">
+      <option value="">
+        — Paste text manually —
+      </option>
+    </select>
+
+
+    <label class="flash-label">
+      Study material
+    </label>
+
+    <textarea
+      id="flashSource"
+      class="flash-source"
+      placeholder="Paste lecture notes, textbook notes, definitions, concepts..."
+    ></textarea>
+
+
+    <div class="flash-options">
+
+      <div>
+
+        <label class="flash-label">
+          Number of cards
+        </label>
+
+        <select id="flashCount">
+          <option value="5">5 cards</option>
+          <option value="10" selected>10 cards</option>
+          <option value="15">15 cards</option>
+          <option value="20">20 cards</option>
+        </select>
+
+      </div>
+
+
+      <div>
+
+        <label class="flash-label">
+          Difficulty
+        </label>
+
+        <select id="flashDifficulty">
+          <option value="easy">Easy</option>
+          <option value="balanced" selected>Balanced</option>
+          <option value="hard">Hard</option>
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <button
+      id="generateFlashButton"
+      class="flash-generate"
+      onclick="generateFlashcards()"
+    >
+      ✨ Generate Flashcards
+    </button>
+
+
+    <div
+      id="flashLoading"
+      class="flash-loading hidden"
+    >
+
+      <div class="flash-spinner"></div>
+
+      <div>
+        <strong>Creating your cards...</strong>
+
+        <p>
+          StudyFlow AI is finding the most important concepts.
+        </p>
+      </div>
+
+    </div>
+
+
+    <p
+      id="flashError"
+      class="flash-error"
+    ></p>
+
+  </div>
+
+
+  <!-- STATS -->
+
+  <div class="panel flash-summary">
+
+    <p class="eyebrow">
+      YOUR FLASHCARDS
+    </p>
+
+    <div class="flash-stat">
+
+      <strong id="flashSetCount">
+        0
+      </strong>
+
+      <span>
+        Study sets
+      </span>
+
+    </div>
+
+
+    <div class="flash-stat">
+
+      <strong id="flashCardCount">
+        0
+      </strong>
+
+      <span>
+        Total cards
+      </span>
+
+    </div>
+
+
+    <div class="flash-stat">
+
+      <strong id="flashStudiedCount">
+        0
+      </strong>
+
+      <span>
+        Cards studied
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- SAVED SETS -->
+
+<div class="flash-section-head">
+
+  <div>
+
+    <p class="eyebrow">
+      SAVED SETS
+    </p>
+
+    <h2>Your Study Sets</h2>
+
+  </div>
+
+</div>
+
+
+<div
+  id="flashcardSets"
+  class="flash-set-grid"
+></div>
+
+
+<!-- STUDY MODE -->
+
+<div
+  id="studyMode"
+  class="study-overlay hidden"
+>
+
+  <div class="study-modal">
+
+    <div class="study-top">
+
+      <div>
+
+        <p
+          id="studySetName"
+          class="eyebrow"
+        >
+          STUDY SET
+        </p>
+
+        <h2 id="studyProgress">
+          Card 1 of 10
+        </h2>
+
+      </div>
+
+      <button
+        class="study-close"
+        onclick="closeStudyMode()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="study-progress-track">
+
+      <div id="studyProgressBar"></div>
+
+    </div>
+
+
+    <div
+      id="studyCard"
+      class="study-card"
+      onclick="flipStudyCard()"
+    >
+
+      <p
+        id="studySideLabel"
+        class="study-side-label"
+      >
+        QUESTION
+      </p>
+
+      <div id="studyCardText">
+        Question
+      </div>
+
+      <p class="study-flip-hint">
+        Click card to flip
+      </p>
+
+    </div>
+
+
+    <div class="study-buttons">
+
+      <button
+        class="again-btn"
+        onclick="markStudyCard(false)"
+      >
+        ↻ Again
+      </button>
+
+      <button
+        class="know-btn"
+        onclick="markStudyCard(true)"
+      >
+        ✓ Know it
+      </button>
+
+    </div>
+
+
+    <div class="study-score">
+
+      <span>
+        ✅ Know:
+        <strong id="studyKnown">0</strong>
+      </span>
+
+      <span>
+        🔁 Again:
+        <strong id="studyAgain">0</strong>
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- FINISHED SCREEN -->
+
+<div
+  id="studyComplete"
+  class="study-overlay hidden"
+>
+
+  <div class="study-complete-card">
+
+    <div class="complete-icon">
+      🎉
+    </div>
+
+    <h1>Study session complete!</h1>
+
+    <p class="muted">
+      Nice work. Here's how you did.
+    </p>
+
+
+    <div class="complete-stats">
+
+      <div>
+
+        <strong id="completeKnown">
+          0
+        </strong>
+
+        <span>
+          Knew
+        </span>
+
+      </div>
+
+
+      <div>
+
+        <strong id="completeAgain">
+          0
+        </strong>
+
+        <span>
+          Review again
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="complete-actions">
+
+      <button
+        class="secondary"
+        onclick="restartCurrentSet()"
+      >
+        ↻ Study Again
+      </button>
+
+      <button
+        onclick="finishStudySession()"
+      >
+        Done
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- AI -->
+
+<section id="ai" class="page">
+
+<div class="page-head">
+
+  <div>
+    <h1>AI Tutor ✨</h1>
+    <p class="muted">Your personal study assistant.</p>
+  </div>
+
+</div>
+
+<div class="ai-layout">
+
+  <div class="panel ai-chat">
+
+    <div id="messages" class="messages">
+
+      <div class="message assistant">
+        <strong>StudyFlow AI</strong>
+        <p>
+          Hey 👋 What are you studying today?
+        </p>
+      </div>
+
+    </div>
+
+    <div class="ai-input">
+
+      <textarea
+        id="aiQuestion"
+        placeholder="Ask me anything..."
+      ></textarea>
+
+      <button onclick="askAI()">Send ➜</button>
+
+    </div>
+
+  </div>
+
+  <div class="panel prompts">
+
+    <h2>Quick prompts</h2>
+
+    <button onclick="promptAI('Explain this topic like I am a beginner')">
+      🧠 Explain simply
+    </button>
+
+    <button onclick="promptAI('Create 5 practice questions for me')">
+      📝 Practice questions
+    </button>
+
+    <button onclick="promptAI('Make me a study plan for my exam')">
+      📚 Study plan
+    </button>
+
+    <button onclick="promptAI('Quiz me on this topic')">
+      ❓ Quiz me
+    </button>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     AI POWER LAB
+===================================================== -->
+
+<section id="aiPower" class="page">
+
+<div class="page-head">
+
+  <div>
+
+    <p class="eyebrow">
+      AI POWER PACK
+    </p>
+
+    <h1>
+      AI Power Lab ⚡
+    </h1>
+
+    <p class="muted">
+      Practice tests, study guides, explanations, PDF summaries,
+      formulas, citations and research planning.
+    </p>
+
+  </div>
+
+</div>
+
+
+<div class="ai-tools-grid">
+
+  <button
+    class="ai-tool-card"
+    onclick="openAITool('practice')"
+  >
+
+    <span>🧪</span>
+
+    <strong>
+      Practice Test
+    </strong>
+
+    <small>
+      Generate A/B/C/D tests
+    </small>
+
+  </button>
+
+
+  <button
+    class="ai-tool-card"
+    onclick="openAITool('quiz')"
+  >
+
+    <span>❓</span>
+
+    <strong>
+      Quiz Me
+    </strong>
+
+    <small>
+      Interactive questions
+    </small>
+
+  </button>
+
+
+  <button
+    class="ai-tool-card"
+    onclick="openAITool('guide')"
+  >
+
+    <span>📚</span>
+
+    <strong>
+      Study Guide
+    </strong>
+
+    <small>
+      Build exam review notes
+    </small>
+
+  </button>
+
+
+  <button
+    class="ai-tool-card"
+    onclick="openAITool('explain')"
+  >
+
+    <span>🧠</span>
+
+    <strong>
+      Explain This
+    </strong>
+
+    <small>
+      Make hard topics simple
+    </small>
+
+  </button>
+
+
+  <button
+    class="ai-tool-card"
+    onclick="openAITool('pdf')"
+  >
+
+    <span>📄</span>
+
+    <strong>
+      PDF Summary
+    </strong>
+
+    <small>
+      Summarize lectures & PDFs
+    </small>
+
+  </button>
+
+
+  <button
+    class="ai-tool-card"
+    onclick="openAITool('formula')"
+  >
+
+    <span>🧮</span>
+
+    <strong>
+      Formula Sheet
+    </strong>
+
+    <small>
+      Extract key formulas
+    </small>
+
+  </button>
+
+
+  <button
+    class="ai-tool-card"
+    onclick="openAITool('citation')"
+  >
+
+    <span>🔗</span>
+
+    <strong>
+      Citation Generator
+    </strong>
+
+    <small>
+      MLA / APA / Chicago
+    </small>
+
+  </button>
+
+
+  <button
+    class="ai-tool-card"
+    onclick="openAITool('research')"
+  >
+
+    <span>✍️</span>
+
+    <strong>
+      Essay Planner
+    </strong>
+
+    <small>
+      Thesis + outline + questions
+    </small>
+
+  </button>
+
+
+  <button
+    class="ai-tool-card"
+    onclick="openAITool('courseAI')"
+  >
+
+    <span>🎓</span>
+
+    <strong>
+      Course Assistant
+    </strong>
+
+    <small>
+      AI context for one class
+    </small>
+
+  </button>
+
+</div>
+
+
+<div class="panel ai-workspace">
+
+  <!-- PRACTICE TEST -->
+
+  <div
+    id="tool-practice"
+    class="ai-tool-panel"
+  >
+
+    <h2>
+      🧪 AI Practice Test
+    </h2>
+
+    <p class="muted">
+      Paste notes or choose one of your saved notes.
+    </p>
+
+
+    <select
+      id="practiceNoteSelect"
+      onchange="loadNoteIntoTool(
+        this.value,
+        'practiceSource'
+      )"
+    >
+
+      <option value="">
+        Choose saved note
+      </option>
+
+    </select>
+
+
+    <textarea
+      id="practiceSource"
+      placeholder="Paste study material..."
+    ></textarea>
+
+
+    <div class="ai-inline-fields">
+
+      <select id="practiceCount">
+        <option value="5">
+          5 questions
+        </option>
+
+        <option value="10" selected>
+          10 questions
+        </option>
+
+        <option value="15">
+          15 questions
+        </option>
+      </select>
+
+
+      <select id="practiceDifficulty">
+
+        <option value="easy">
+          Easy
+        </option>
+
+        <option value="medium" selected>
+          Medium
+        </option>
+
+        <option value="hard">
+          Hard
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <button
+      id="generatePracticeButton"
+      onclick="generatePracticeTest()"
+    >
+      ✨ Generate Test
+    </button>
+
+
+    <p
+      id="practiceError"
+      class="ai-tool-error"
+    ></p>
+
+
+    <div
+      id="practiceTestArea"
+      class="practice-test-area"
+    ></div>
+
+  </div>
+
+
+  <!-- QUIZ ME -->
+
+  <div
+    id="tool-quiz"
+    class="ai-tool-panel hidden"
+  >
+
+    <h2>
+      ❓ Quiz Me
+    </h2>
+
+    <p class="muted">
+      AI asks one question at a time.
+    </p>
+
+
+    <textarea
+      id="quizTopic"
+      placeholder="Example: inverse functions, chapter 4 chemistry, WWI..."
+    ></textarea>
+
+
+    <button onclick="startAIQuiz()">
+      Start Quiz
+    </button>
+
+
+    <div
+      id="quizConversation"
+      class="quiz-conversation"
+    ></div>
+
+  </div>
+
+
+  <!-- STUDY GUIDE -->
+
+  <div
+    id="tool-guide"
+    class="ai-tool-panel hidden"
+  >
+
+    <h2>
+      📚 Study Guide Generator
+    </h2>
+
+    <select
+      id="guideNoteSelect"
+      onchange="loadNoteIntoTool(
+        this.value,
+        'guideSource'
+      )"
+    >
+      <option value="">
+        Choose saved note
+      </option>
+    </select>
+
+
+    <textarea
+      id="guideSource"
+      placeholder="Paste notes or exam material..."
+    ></textarea>
+
+
+    <button
+      onclick="generateStudyGuide()"
+    >
+      ✨ Create Study Guide
+    </button>
+
+
+    <div
+      id="guideResult"
+      class="ai-output"
+    ></div>
+
+  </div>
+
+
+  <!-- EXPLAIN -->
+
+  <div
+    id="tool-explain"
+    class="ai-tool-panel hidden"
+  >
+
+    <h2>
+      🧠 Explain This
+    </h2>
+
+    <textarea
+      id="explainSource"
+      placeholder="Paste a problem, paragraph, concept or question..."
+    ></textarea>
+
+
+    <select id="explainLevel">
+
+      <option value="very simple">
+        Very simple
+      </option>
+
+      <option value="college beginner" selected>
+        College beginner
+      </option>
+
+      <option value="detailed">
+        Detailed
+      </option>
+
+    </select>
+
+
+    <button onclick="explainThis()">
+      Explain
+    </button>
+
+
+    <div
+      id="explainResult"
+      class="ai-output"
+    ></div>
+
+  </div>
+
+
+  <!-- PDF -->
+
+  <div
+    id="tool-pdf"
+    class="ai-tool-panel hidden"
+  >
+
+    <h2>
+      📄 PDF / Lecture Summarizer
+    </h2>
+
+    <div class="ai-pdf-drop">
+
+      <input
+        id="aiPdfFile"
+        type="file"
+        accept=".pdf,application/pdf"
+      >
+
+    </div>
+
+
+    <select id="pdfSummaryType">
+
+      <option value="summary">
+        Short summary
+      </option>
+
+      <option value="study">
+        Study notes
+      </option>
+
+      <option value="exam">
+        Exam review
+      </option>
+
+      <option value="concepts">
+        Key concepts
+      </option>
+
+    </select>
+
+
+    <button onclick="summarizePDF()">
+      ✨ Analyze PDF
+    </button>
+
+
+    <div
+      id="pdfResult"
+      class="ai-output"
+    ></div>
+
+  </div>
+
+
+  <!-- FORMULA -->
+
+  <div
+    id="tool-formula"
+    class="ai-tool-panel hidden"
+  >
+
+    <h2>
+      🧮 Formula Sheet
+    </h2>
+
+    <textarea
+      id="formulaSource"
+      placeholder="Paste math, physics, engineering or chemistry notes..."
+    ></textarea>
+
+
+    <button onclick="generateFormulaSheet()">
+      Generate Formula Sheet
+    </button>
+
+
+    <div
+      id="formulaResult"
+      class="ai-output"
+    ></div>
+
+  </div>
+
+
+  <!-- CITATION -->
+
+  <div
+    id="tool-citation"
+    class="ai-tool-panel hidden"
+  >
+
+    <h2>
+      🔗 Citation Generator
+    </h2>
+
+    <select id="citationStyle">
+
+      <option value="MLA 9">
+        MLA 9
+      </option>
+
+      <option value="APA 7">
+        APA 7
+      </option>
+
+      <option value="Chicago">
+        Chicago
+      </option>
+
+    </select>
+
+
+    <textarea
+      id="citationSource"
+      placeholder="Paste URL, book information, article title/author/date, DOI, etc..."
+    ></textarea>
+
+
+    <button onclick="generateCitation()">
+      Generate Citation
+    </button>
+
+
+    <div
+      id="citationResult"
+      class="ai-output"
+    ></div>
+
+  </div>
+
+
+  <!-- RESEARCH -->
+
+  <div
+    id="tool-research"
+    class="ai-tool-panel hidden"
+  >
+
+    <h2>
+      ✍️ Essay & Research Planner
+    </h2>
+
+    <textarea
+      id="researchTopic"
+      placeholder="Example: How does AI affect college students' learning?"
+    ></textarea>
+
+
+    <select id="researchType">
+
+      <option value="research paper">
+        Research Paper
+      </option>
+
+      <option value="argumentative essay">
+        Argumentative Essay
+      </option>
+
+      <option value="analysis essay">
+        Analysis Essay
+      </option>
+
+      <option value="presentation">
+        Presentation
+      </option>
+
+    </select>
+
+
+    <button onclick="generateResearchPlan()">
+      ✨ Build Plan
+    </button>
+
+
+    <div
+      id="researchResult"
+      class="ai-output"
+    ></div>
+
+  </div>
+
+
+  <!-- COURSE AI -->
+
+  <div
+    id="tool-courseAI"
+    class="ai-tool-panel hidden"
+  >
+
+    <h2>
+      🎓 Course Assistant
+    </h2>
+
+    <p class="muted">
+      StudyFlow will include your notes and tasks
+      from the selected class as context.
+    </p>
+
+
+    <select id="courseAIClass">
+
+      <option value="">
+        Select class
+      </option>
+
+    </select>
+
+
+    <textarea
+      id="courseAIQuestion"
+      placeholder="Ask something about this class..."
+    ></textarea>
+
+
+    <button onclick="askCourseAI()">
+      Ask Course Assistant
+    </button>
+
+
+    <div
+      id="courseAIResult"
+      class="ai-output"
+    ></div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- TIMER -->
+
+<section id="timer" class="page">
+
+<div class="page-head">
+  <div>
+    <h1>Focus</h1>
+    <p class="muted">Pomodoro study timer.</p>
+  </div>
+</div>
+
+<div class="focus-layout">
+
+  <div class="panel timer-panel">
+
+    <p class="eyebrow">FOCUS SESSION</p>
+
+    <div id="timerDisplay">25:00</div>
+
+    <div class="timer-actions">
+      <button id="timerButton" onclick="toggleTimer()">▶ Start</button>
+      <button class="secondary" onclick="resetTimer()">Reset</button>
+    </div>
+
+    <div class="presets">
+      <button onclick="setTimer(25)">25 min</button>
+      <button onclick="setTimer(45)">45 min</button>
+      <button onclick="setTimer(60)">60 min</button>
+    </div>
+
+  </div>
+
+  <div class="panel">
+
+    <h2>Study Stats</h2>
+
+    <div class="focus-stat">
+      <strong id="focusSessions">0</strong>
+      <span>Sessions completed</span>
+    </div>
+
+    <div class="focus-stat">
+      <strong id="focusMinutes">0</strong>
+      <span>Minutes studied</span>
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+<!-- PROFILE -->
+
+<section id="profile" class="page">
+
+<div class="page-head">
+  <div>
+    <h1>Profile</h1>
+    <p class="muted">Personalize StudyFlow.</p>
+  </div>
+</div>
+
+<div class="panel profile-panel">
+
+  <label>Name</label>
+  <input id="profileName">
+
+  <label>Email</label>
+  <input id="profileEmail" disabled>
+
+  <label>University</label>
+  <input id="profileUniversity" placeholder="University">
+
+  <label>Major</label>
+  <input id="profileMajor" placeholder="Major">
+
+  <button onclick="saveProfile()">Save Profile</button>
+
+  <p id="profileSaved"></p>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SETTINGS
+===================================================== -->
+
+<section id="settings" class="page">
+
+<div class="page-head">
+
+  <div>
+
+    <p class="eyebrow">
+      STUDYFLOW
+    </p>
+
+    <h1>
+      Settings ⚙️
+    </h1>
+
+    <p class="muted">
+      Customize your workspace and manage your data.
+    </p>
+
+  </div>
+
+</div>
+
+
+<div class="settings-layout">
+
+
+<!-- APPEARANCE -->
+
+<div class="panel settings-card">
+
+  <div class="settings-icon">
+    🎨
+  </div>
+
+  <h2>
+    Appearance
+  </h2>
+
+  <p class="muted">
+    Make StudyFlow look the way you want.
+  </p>
+
+
+  <label>
+    Theme
+  </label>
+
+  <select
+    id="settingsTheme"
+    onchange="updateProSettings()"
+  >
+
+    <option value="light">
+      Light
+    </option>
+
+    <option value="dark">
+      Dark
+    </option>
+
+    <option value="system">
+      System
+    </option>
+
+  </select>
+
+
+  <label>
+    Accent color
+  </label>
+
+  <div class="accent-picker">
+
+    <button
+      class="accent-option purple"
+      onclick="setAccent('#635bff')"
+      title="Purple"
+    ></button>
+
+    <button
+      class="accent-option blue"
+      onclick="setAccent('#2563eb')"
+      title="Blue"
+    ></button>
+
+    <button
+      class="accent-option green"
+      onclick="setAccent('#16a34a')"
+      title="Green"
+    ></button>
+
+    <button
+      class="accent-option orange"
+      onclick="setAccent('#ea580c')"
+      title="Orange"
+    ></button>
+
+    <button
+      class="accent-option pink"
+      onclick="setAccent('#db2777')"
+      title="Pink"
+    ></button>
+
+  </div>
+
+
+  <label>
+    Interface size
+  </label>
+
+  <select
+    id="settingsDensity"
+    onchange="updateProSettings()"
+  >
+
+    <option value="normal">
+      Normal
+    </option>
+
+    <option value="compact">
+      Compact
+    </option>
+
+    <option value="large">
+      Large
+    </option>
+
+  </select>
+
+</div>
+
+
+<!-- DASHBOARD -->
+
+<div class="panel settings-card">
+
+  <div class="settings-icon">
+    🏠
+  </div>
+
+  <h2>
+    Dashboard
+  </h2>
+
+  <p class="muted">
+    Choose what appears on your dashboard.
+  </p>
+
+
+  <label class="toggle-row">
+
+    <span>
+      Show statistics
+    </span>
+
+    <input
+      id="showDashboardStats"
+      type="checkbox"
+      onchange="updateProSettings()"
+    >
+
+  </label>
+
+
+  <label class="toggle-row">
+
+    <span>
+      Show upcoming tasks
+    </span>
+
+    <input
+      id="showDashboardUpcoming"
+      type="checkbox"
+      onchange="updateProSettings()"
+    >
+
+  </label>
+
+
+  <label class="toggle-row">
+
+    <span>
+      Show AI Assistant card
+    </span>
+
+    <input
+      id="showDashboardAI"
+      type="checkbox"
+      onchange="updateProSettings()"
+    >
+
+  </label>
+
+
+  <label class="toggle-row">
+
+    <span>
+      Compact sidebar
+    </span>
+
+    <input
+      id="compactSidebar"
+      type="checkbox"
+      onchange="updateProSettings()"
+    >
+
+  </label>
+
+</div>
+
+
+<!-- APP -->
+
+<div class="panel settings-card">
+
+  <div class="settings-icon">
+    📱
+  </div>
+
+  <h2>
+    App
+  </h2>
+
+  <p class="muted">
+    Install StudyFlow like a real application.
+  </p>
+
+
+  <button
+    id="settingsInstallButton"
+    onclick="installStudyFlowApp()"
+  >
+    📲 Install StudyFlow
+  </button>
+
+
+  <button
+    class="secondary settings-button"
+    onclick="requestStudyNotifications()"
+  >
+    🔔 Enable Notifications
+  </button>
+
+
+  <div class="settings-note">
+
+    <strong>
+      Tip for iPhone
+    </strong>
+
+    <p>
+      Open StudyFlow in Safari → Share →
+      Add to Home Screen.
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- CALENDAR -->
+
+<div class="panel settings-card">
+
+  <div class="settings-icon">
+    📅
+  </div>
+
+  <h2>
+    Calendar
+  </h2>
+
+  <p class="muted">
+    Move StudyFlow deadlines into another calendar.
+  </p>
+
+
+  <button
+    onclick="exportCalendarICS()"
+  >
+    Download Calendar (.ics)
+  </button>
+
+
+  <button
+    class="secondary settings-button"
+    onclick="showGoogleCalendarInfo()"
+  >
+    Google Calendar Sync
+  </button>
+
+
+  <div
+    id="googleCalendarInfo"
+    class="settings-note hidden"
+  >
+
+    <strong>
+      Google Calendar
+    </strong>
+
+    <p>
+      Live two-way sync needs Google OAuth credentials.
+      The .ics export above already works without them.
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- DATA -->
+
+<div class="panel settings-card">
+
+  <div class="settings-icon">
+    💾
+  </div>
+
+  <h2>
+    Your Data
+  </h2>
+
+  <p class="muted">
+    Backup or transfer your StudyFlow information.
+  </p>
+
+
+  <button onclick="exportStudyFlowData()">
+    ⬇ Export Backup
+  </button>
+
+
+  <label class="settings-file-button">
+
+    ⬆ Import Backup
+
+    <input
+      id="studyFlowImportFile"
+      type="file"
+      accept=".json,application/json"
+      onchange="importStudyFlowData(this.files[0])"
+      hidden
+    >
+
+  </label>
+
+
+  <button
+    class="danger-settings-button"
+    onclick="resetStudyFlowData()"
+  >
+    🗑 Reset My Study Data
+  </button>
+
+</div>
+
+
+<!-- CLOUD -->
+
+<div class="panel settings-card">
+
+  <div class="settings-icon">
+    ☁️
+  </div>
+
+  <h2>
+    Cloud Sync
+  </h2>
+
+  <p class="muted">
+    The current version stores student workspace data
+    locally on this device.
+  </p>
+
+
+  <div class="cloud-status">
+
+    <span class="cloud-dot"></span>
+
+    <div>
+
+      <strong>
+        Local Mode
+      </strong>
+
+      <p>
+        Supabase/Postgres can be connected next.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <button
+    class="secondary"
+    onclick="showCloudInfo()"
+  >
+    Cloud Setup Info
+  </button>
+
+
+  <div
+    id="cloudInfo"
+    class="settings-note hidden"
+  >
+
+    <p>
+      The app is already structured so localStorage
+      data can later be migrated to a cloud database
+      without redesigning the interface.
+    </p>
+
+  </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CLOUD SYNC
+===================================================== -->
+
+<section id="cloudSync" class="page">
+
+<div class="page-head">
+
+  <div>
+
+    <p class="eyebrow">
+      STUDYFLOW CLOUD
+    </p>
+
+    <h1>
+      Cloud Sync ☁️
+    </h1>
+
+    <p class="muted">
+      Keep your StudyFlow workspace available
+      across your devices.
+    </p>
+
+  </div>
+
+
+  <div
+    id="cloudHeaderStatus"
+    class="cloud-pill cloud-pill-offline"
+  >
+
+    Checking...
+
+  </div>
+
+</div>
+
+
+<div class="cloud-layout">
+
+
+<!-- MAIN CLOUD CARD -->
+
+<div class="panel cloud-main-card">
+
+  <div class="cloud-hero-icon">
+    ☁️
+  </div>
+
+  <h2 id="cloudMainTitle">
+    Checking Cloud Sync...
+  </h2>
+
+  <p
+    id="cloudMainDescription"
+    class="muted"
+  >
+    Connecting to StudyFlow Cloud.
+  </p>
+
+
+  <div class="cloud-actions">
+
+    <button
+      id="cloudPushButton"
+      onclick="pushStudyFlowCloud()"
+    >
+      ↑ Push to Cloud
+    </button>
+
+
+    <button
+      id="cloudPullButton"
+      class="secondary"
+      onclick="pullStudyFlowCloud()"
+    >
+      ↓ Pull from Cloud
+    </button>
+
+
+    <button
+      class="secondary"
+      onclick="refreshCloudStatus()"
+    >
+      ↻ Refresh
+    </button>
+
+  </div>
+
+
+  <label class="cloud-auto-row">
+
+    <div>
+
+      <strong>
+        Auto Sync
+      </strong>
+
+      <p>
+        Automatically upload changes after you edit StudyFlow.
+      </p>
+
+    </div>
+
+
+    <input
+      id="cloudAutoSync"
+      type="checkbox"
+      onchange="toggleCloudAutoSync()"
+    >
+
+  </label>
+
+
+  <div
+    id="cloudMessage"
+    class="cloud-message hidden"
+  ></div>
+
+</div>
+
+
+<!-- STATUS -->
+
+<div class="panel cloud-info-card">
+
+  <p class="eyebrow">
+    STATUS
+  </p>
+
+
+  <div class="cloud-info-row">
+
+    <span>
+      Connection
+    </span>
+
+    <strong id="cloudConnectionText">
+      Checking...
+    </strong>
+
+  </div>
+
+
+  <div class="cloud-info-row">
+
+    <span>
+      Cloud backup
+    </span>
+
+    <strong id="cloudBackupText">
+      —
+    </strong>
+
+  </div>
+
+
+  <div class="cloud-info-row">
+
+    <span>
+      Last cloud update
+    </span>
+
+    <strong id="cloudUpdatedText">
+      —
+    </strong>
+
+  </div>
+
+
+  <div class="cloud-info-row">
+
+    <span>
+      Last device sync
+    </span>
+
+    <strong id="cloudLastSyncText">
+      Never
+    </strong>
+
+  </div>
+
+</div>
+
+</div>
+
+
+<!-- DEVICE DATA -->
+
+<div class="panel cloud-device-data">
+
+  <div class="panel-head">
+
+    <div>
+
+      <p class="eyebrow">
+        THIS DEVICE
+      </p>
+
+      <h2>
+        Data ready to sync
+      </h2>
+
+    </div>
+
+  </div>
+
+
+  <div class="cloud-data-grid">
+
+    <div>
+
+      <strong id="cloudClassesCount">
+        0
+      </strong>
+
+      <span>
+        Classes
+      </span>
+
+    </div>
+
+
+    <div>
+
+      <strong id="cloudTasksCount">
+        0
+      </strong>
+
+      <span>
+        Tasks
+      </span>
+
+    </div>
+
+
+    <div>
+
+      <strong id="cloudNotesCount">
+        0
+      </strong>
+
+      <span>
+        Notes
+      </span>
+
+    </div>
+
+
+    <div>
+
+      <strong id="cloudGradesCount">
+        0
+      </strong>
+
+      <span>
+        Grades
+      </span>
+
+    </div>
+
+
+    <div>
+
+      <strong id="cloudFlashcardsCount">
+        0
+      </strong>
+
+      <span>
+        Flashcard sets
+      </span>
+
+    </div>
+
+
+    <div>
+
+      <strong id="cloudDegreeCount">
+        0
+      </strong>
+
+      <span>
+        Degree courses
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- SETUP -->
+
+<div
+  id="cloudSetupHelp"
+  class="panel cloud-setup-help hidden"
+>
+
+  <p class="eyebrow">
+    CLOUD SETUP REQUIRED
+  </p>
+
+  <h2>
+    Connect Supabase
+  </h2>
+
+  <p class="muted">
+    StudyFlow is fully functional locally.
+    To enable cross-device sync, configure
+    Supabase on the server.
+  </p>
+
+
+  <div class="cloud-code">
+
+    <div>
+      SUPABASE_URL=...
+    </div>
+
+    <div>
+      SUPABASE_SECRET_KEY=sb_secret_...
+    </div>
+
+  </div>
+
+
+  <p class="muted">
+    The installer created
+    <strong>supabase-schema.sql</strong>
+    and
+    <strong>CLOUD-SETUP.md</strong>
+    in your project folder.
+  </p>
+
+</div>
+
+</section>
+
+</main>
+</div>
+
+
+
+<!-- QUICK ADD -->
+
+<button
+  id="quickAddButton"
+  class="quick-add-button"
+  onclick="toggleQuickAdd()"
+>
+  +
+</button>
+
+
+<div
+  id="quickAddMenu"
+  class="quick-add-menu hidden"
+>
+
+  <button onclick="quickAddTask()">
+    ✅ New Task
+  </button>
+
+  <button onclick="quickAddNote()">
+    📝 New Note
+  </button>
+
+  <button onclick="quickAddClass()">
+    📚 New Class
+  </button>
+
+</div>
+
+
+<!-- COMMAND PALETTE -->
+
+<div
+  id="commandPalette"
+  class="command-overlay hidden"
+>
+
+  <div class="command-box">
+
+    <div class="command-input-wrap">
+
+      <span>⌘</span>
+
+      <input
+        id="commandInput"
+        placeholder="Search StudyFlow..."
+        autocomplete="off"
+      >
+
+      <kbd>ESC</kbd>
+
+    </div>
+
+
+    <div id="commandResults"></div>
+
+  </div>
+
+</div>
+
+
+<!-- NOTIFICATION TOAST -->
+
+<div
+  id="studyToast"
+  class="study-toast hidden"
+></div>
+
+
+
+
+<!-- =====================================================
+     ONBOARDING
+===================================================== -->
+
+<div
+  id="studyFlowOnboarding"
+  class="onboarding-overlay hidden"
+>
+
+  <div class="onboarding-card">
+
+    <div class="onboarding-logo">
+      🎓
+    </div>
+
+    <p class="eyebrow">
+      WELCOME TO STUDYFLOW
+    </p>
+
+    <h1>
+      Let's set up your workspace
+    </h1>
+
+    <p class="muted onboarding-intro">
+      A few quick details and StudyFlow will personalize
+      your student dashboard.
+    </p>
+
+
+    <div class="onboarding-grid">
+
+      <div>
+
+        <label>
+          University
+        </label>
+
+        <input
+          id="onboardingUniversity"
+          placeholder="Oakland University"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Major
+        </label>
+
+        <input
+          id="onboardingMajor"
+          placeholder="Computer Science"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Current semester
+        </label>
+
+        <select id="onboardingSemester">
+
+          <option value="Fall 2026">
+            Fall 2026
+          </option>
+
+          <option value="Winter 2027">
+            Winter 2027
+          </option>
+
+          <option value="Summer 2027">
+            Summer 2027
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Degree credits required
+        </label>
+
+        <input
+          id="onboardingCredits"
+          type="number"
+          min="1"
+          value="120"
+        >
+
+      </div>
+
+    </div>
+
+
+    <div class="onboarding-theme">
+
+      <span>
+        Choose your style
+      </span>
+
+      <div>
+
+        <button
+          class="onboarding-theme-button"
+          onclick="chooseOnboardingTheme('light')"
+        >
+          ☀️ Light
+        </button>
+
+        <button
+          class="onboarding-theme-button"
+          onclick="chooseOnboardingTheme('dark')"
+        >
+          🌙 Dark
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="onboarding-start"
+      onclick="completeStudyFlowOnboarding()"
+    >
+      Start using StudyFlow →
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- INSTALL BANNER -->
+
+<div
+  id="installBanner"
+  class="install-banner hidden"
+>
+
+  <div>
+
+    <strong>
+      📱 Install StudyFlow
+    </strong>
+
+    <p>
+      Use it like a real app from your desktop or phone.
+    </p>
+
+  </div>
+
+
+  <div>
+
+    <button
+      onclick="installStudyFlowApp()"
+    >
+      Install
+    </button>
+
+    <button
+      class="install-close"
+      onclick="dismissInstallBanner()"
+    >
+      ×
+    </button>
+
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

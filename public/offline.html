@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StudyFlow Offline</title>
+
+<style>
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+background:#0f1117;
+color:white;
+min-height:100vh;
+display:grid;
+place-items:center;
+text-align:center;
+padding:30px;
+}
+
+.box{
+max-width:500px;
+}
+
+.icon{
+font-size:70px;
+}
+
+h1{
+font-size:38px;
+margin:15px 0 8px;
+}
+
+p{
+color:#a7abb8;
+line-height:1.6;
+}
+
+button{
+margin-top:20px;
+border:0;
+padding:13px 20px;
+border-radius:11px;
+background:#635bff;
+color:#fff;
+font-weight:700;
+cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<div class="icon">🎓</div>
+
+<h1>You're offline</h1>
+
+<p>
+StudyFlow can't reach the server right now.
+Some previously loaded parts of the app may still work.
+</p>
+
+<button onclick="location.reload()">
+Try Again
+</button>
+
+</div>
+
+</body>
+</html>

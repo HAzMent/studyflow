@@ -1,0 +1,19 @@
+{
+  "name": "StudyFlow",
+  "short_name": "StudyFlow",
+  "description": "AI-powered student planner and study workspace.",
+  "start_url": "/app",
+  "display": "standalone",
+  "background_color": "#f5f7fb",
+  "theme_color": "#635bff",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/studyflow-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "scope": "/"
+}

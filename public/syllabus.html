@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Syllabus AI — StudyFlow</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="syllabus.css">
+</head>
+
+<body>
+
+<aside>
+
+  <div class="logo">
+    🎓 <span>StudyFlow</span>
+  </div>
+
+  <nav>
+
+    <button
+      class="nav"
+      onclick="location.href='/'"
+    >
+      🏠 Dashboard
+    </button>
+
+    <button class="nav active">
+      📄 Syllabus AI
+    </button>
+
+  </nav>
+
+  <button
+    class="logout"
+    onclick="location.href='/'"
+  >
+    ← Back
+  </button>
+
+</aside>
+
+
+<main>
+
+  <section>
+
+    <header>
+
+      <div>
+
+        <p class="eyebrow">
+          AI AUTOMATION
+        </p>
+
+        <h1>
+          Syllabus Scanner ✨
+        </h1>
+
+        <p class="muted">
+          Upload your syllabus and let StudyFlow find
+          deadlines automatically.
+        </p>
+
+      </div>
+
+      <div
+        id="syllabusAvatar"
+        class="avatar"
+      >
+        S
+      </div>
+
+    </header>
+
+
+    <!-- UPLOAD -->
+
+    <div class="syllabus-layout">
+
+      <div class="panel">
+
+        <h2>
+          Upload syllabus
+        </h2>
+
+        <p class="muted upload-description">
+          Upload a PDF from Moodle, your professor,
+          or your course page.
+        </p>
+
+
+        <label
+          id="dropZone"
+          class="drop-zone"
+        >
+
+          <input
+            id="syllabusFile"
+            type="file"
+            accept="application/pdf,.pdf"
+            hidden
+          >
+
+          <div
+            id="uploadIcon"
+            class="upload-icon"
+          >
+            📄
+          </div>
+
+          <h3 id="dropTitle">
+            Drop your syllabus here
+          </h3>
+
+          <p id="dropText">
+            or click to choose a PDF
+          </p>
+
+          <span class="upload-note">
+            PDF · recommended under 15 MB
+          </span>
+
+        </label>
+
+
+        <div
+          id="selectedFile"
+          class="selected-file hidden"
+        >
+
+          <div>
+
+            <strong id="selectedFileName"></strong>
+
+            <p id="selectedFileSize"></p>
+
+          </div>
+
+          <button
+            class="remove-file"
+            onclick="removeSelectedFile()"
+          >
+            ×
+          </button>
+
+        </div>
+
+
+        <button
+          id="analyzeButton"
+          class="analyze-button"
+          onclick="analyzeSyllabus()"
+          disabled
+        >
+          ✨ Analyze Syllabus
+        </button>
+
+
+        <div
+          id="analysisStatus"
+          class="analysis-status hidden"
+        >
+
+          <div class="spinner"></div>
+
+          <div>
+
+            <strong id="statusTitle">
+              Reading your syllabus...
+            </strong>
+
+            <p id="statusText">
+              Looking for assignments, quizzes and exams.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <p
+          id="analysisError"
+          class="analysis-error"
+        ></p>
+
+      </div>
+
+
+      <!-- HOW IT WORKS -->
+
+      <div class="panel help-panel">
+
+        <div class="help-icon">
+          🪄
+        </div>
+
+        <h2>
+          What StudyFlow finds
+        </h2>
+
+        <div class="feature-row">
+
+          <span>📝</span>
+
+          <div>
+            <strong>Assignments</strong>
+            <p>Homework and course work</p>
+          </div>
+
+        </div>
+
+
+        <div class="feature-row">
+
+          <span>🧪</span>
+
+          <div>
+            <strong>Quizzes & Exams</strong>
+            <p>Tests, midterms and finals</p>
+          </div>
+
+        </div>
+
+
+        <div class="feature-row">
+
+          <span>🚀</span>
+
+          <div>
+            <strong>Projects</strong>
+            <p>Projects and presentations</p>
+          </div>
+
+        </div>
+
+
+        <div class="feature-row">
+
+          <span>📅</span>
+
+          <div>
+            <strong>Deadlines</strong>
+            <p>Automatically converted to your calendar</p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- RESULTS -->
+
+    <div
+      id="resultsSection"
+      class="results-section hidden"
+    >
+
+      <div class="results-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            ANALYSIS COMPLETE
+          </p>
+
+          <h2 id="detectedCourse">
+            Course
+          </h2>
+
+          <p
+            id="detectedInstructor"
+            class="muted"
+          ></p>
+
+        </div>
+
+
+        <div class="results-actions">
+
+          <button
+            class="secondary"
+            onclick="selectAllEvents()"
+          >
+            Select all
+          </button>
+
+          <button
+            onclick="addSelectedToStudyFlow()"
+          >
+            + Add selected to StudyFlow
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="result-stats">
+
+        <div class="mini-stat">
+
+          <strong id="eventCount">
+            0
+          </strong>
+
+          <span>
+            Events found
+          </span>
+
+        </div>
+
+
+        <div class="mini-stat">
+
+          <strong id="datedCount">
+            0
+          </strong>
+
+          <span>
+            With dates
+          </span>
+
+        </div>
+
+
+        <div class="mini-stat">
+
+          <strong id="highCount">
+            0
+          </strong>
+
+          <span>
+            High priority
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="syllabusEvents"
+        class="syllabus-events"
+      ></div>
+
+
+      <div
+        id="importSuccess"
+        class="import-success hidden"
+      >
+
+        <span>
+          ✅
+        </span>
+
+        <div>
+
+          <strong id="importSuccessTitle">
+            Added to StudyFlow
+          </strong>
+
+          <p>
+            Your Tasks and Calendar have been updated.
+          </p>
+
+        </div>
+
+        <button onclick="location.href='/'">
+          Open Dashboard →
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<script src="syllabus.js"></script>
+
+</body>
+</html>
