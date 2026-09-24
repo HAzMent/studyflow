@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import OpenAI from "openai";
 import fs from "fs";
 import cloudRouter from "./cloud-routes.js";
+import supabaseAuthRouter from "./auth-routes.js";
 
 dotenv.config();
 
@@ -38,6 +39,12 @@ app.use(
     }
   })
 );
+
+
+/*
+  Supabase-backed StudyFlow accounts
+*/
+app.use("/api", supabaseAuthRouter);
 
 app.use("/api/cloud", cloudRouter);
 
