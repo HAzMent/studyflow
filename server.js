@@ -6,6 +6,8 @@ import OpenAI from "openai";
 import fs from "fs";
 import cloudRouter from "./cloud-routes.js";
 import supabaseAuthRouter from "./auth-routes.js";
+import { createSessionMiddleware } from "./session-config.js";
+import authExtraRouter from "./auth-extra-routes.js";
 
 dotenv.config();
 
@@ -29,6 +31,8 @@ function saveUsers(users) {
 
 app.use(express.json({ limit: "25mb" }));
 
+app.use(createSessionMiddleware());
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "studyflow-secret-change-me",
@@ -45,6 +49,7 @@ app.use(
   Supabase-backed StudyFlow accounts
 */
 app.use("/api", supabaseAuthRouter);
+app.use("/api", authExtraRouter);
 
 app.use("/api/cloud", cloudRouter);
 
@@ -111,6 +116,19 @@ app.get("/terms", (req, res) => {
 
 });
 
+
+
+app.get("/forgot-password", (req, res) => {
+  res.sendFile("forgot-password.html", {
+    root: "public"
+  });
+});
+
+app.get("/reset-password", (req, res) => {
+  res.sendFile("reset-password.html", {
+    root: "public"
+  });
+});
 
 app.use(express.static("public"));
 

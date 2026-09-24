@@ -3074,3 +3074,22 @@ align-items:flex-start;
 }
 
 }
+
+/* PART 8 AUTH */
+
+.studyflow-forgot-password-link{
+text-align:center;
+margin-top:11px;
+}
+
+.studyflow-forgot-password-link a{
+font-size:12px;
+font-weight:700;
+color:var(--primary);
+text-decoration:none;
+}
+
+.studyflow-forgot-password-link a:hover{
+text-decoration:underline;
+}
+

@@ -9,10 +9,13 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.117.1",
     "bcryptjs": "^3.0.2",
+    "connect-pg-simple": "^10.0.0",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "express-session": "^1.18.2",
-    "openai": "^7.22.0"
+    "openai": "^7.22.0",
+    "pg": "^8.23.0",
+    "resend": "^6.28.1"
   },
   "engines": {
     "node": ">=20"
