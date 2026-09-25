@@ -1,4 +1,4 @@
-const CACHE = "studyflow-phase4c3-final-sidebar";
+const CACHE = "studyflow-sw-safe-v1";
 
 const STATIC_FILES = [
   "/",
@@ -12,6 +12,11 @@ const STATIC_FILES = [
   "/taskflow-pro.css"
 ];
 
+
+/* =========================================================
+   INSTALL
+========================================================= */
+
 self.addEventListener("install", event => {
 
   event.waitUntil(
@@ -23,8 +28,13 @@ self.addEventListener("install", event => {
   );
 
   self.skipWaiting();
+
 });
 
+
+/* =========================================================
+   ACTIVATE
+========================================================= */
 
 self.addEventListener("activate", event => {
 
@@ -38,26 +48,44 @@ self.addEventListener("activate", event => {
             .map(key => caches.delete(key))
         )
       )
+      .then(() =>
+        self.clients.claim()
+      )
   );
 
-  self.clients.claim();
 });
 
 
+/* =========================================================
+   FETCH
+========================================================= */
+
 self.addEventListener("fetch", event => {
 
-  const sfUrl = new URL(event.request.url);
-  if (sfUrl.protocol !== "http:" && sfUrl.protocol !== "https:") {
+  const request = event.request;
+  const url = new URL(request.url);
+
+
+  // Only handle normal web requests.
+  if(
+    url.protocol !== "http:" &&
+    url.protocol !== "https:"
+  ){
     return;
   }
 
 
-  const request = event.request;
+  // Never let the PWA cache interfere with local development.
+  if(
+    self.location.hostname === "localhost" ||
+    self.location.hostname === "127.0.0.1"
+  ){
+    return;
+  }
 
-  const url =
-    new URL(request.url);
 
-
+  // API calls and non-GET requests must always go directly
+  // to the server.
   if(
     request.method !== "GET" ||
     url.pathname.startsWith("/api/")
@@ -67,34 +95,49 @@ self.addEventListener("fetch", event => {
 
 
   event.respondWith(
+    (async () => {
 
-    fetch(request)
+      try {
 
-      .then(response => {
-
-        const copy =
-          response.clone();
+        const response =
+          await fetch(request);
 
 
-        caches
-          .open(CACHE)
-          .then(cache =>
-            cache.put(
+        // Cache only successful same-origin responses.
+        if(
+          response &&
+          response.ok &&
+          url.origin === self.location.origin
+        ){
+
+          try {
+
+            const cache =
+              await caches.open(CACHE);
+
+            await cache.put(
               request,
-              copy
-            )
-          );
+              response.clone()
+            );
+
+          } catch(cacheError){
+
+            console.warn(
+              "StudyFlow SW cache write skipped:",
+              cacheError
+            );
+
+          }
+
+        }
 
 
         return response;
 
-      })
-
-      .catch(async () => {
+      } catch(networkError){
 
         const cached =
           await caches.match(request);
-
 
         if(cached){
           return cached;
@@ -104,13 +147,26 @@ self.addEventListener("fetch", event => {
         if(
           request.mode === "navigate"
         ){
-          return caches.match(
-            "/offline.html"
-          );
+
+          const offline =
+            await caches.match(
+              "/offline.html"
+            );
+
+          if(offline){
+            return offline;
+          }
+
         }
 
-      })
 
+        // CRITICAL:
+        // respondWith() must ALWAYS receive a Response.
+        return Response.error();
+
+      }
+
+    })()
   );
 
 });
