@@ -4,3 +4,21 @@ backup-part*/
 .DS_Store
 data/users.json
 npm-debug.log
+
+# StudyFlow development artifacts
+backup-*/
+studyflow-qa-*.txt
+studyflow-*-audit.txt
+studyflow-performance-audit.txt
+
+# Local build/fix scripts
+part*.sh
+fix*.sh
+repair*.sh
+qa*.sh
+phase*.sh
+final-*.sh
+emergency*.sh
+
+# OS / logs
+*.log

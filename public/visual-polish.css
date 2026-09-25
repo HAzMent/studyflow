@@ -1,0 +1,469 @@
+
+/* ==========================================================
+   STUDYFLOW — FINAL VISUAL SYSTEM
+   PHASE 4B
+
+   Loaded LAST.
+   Visual consistency only.
+   No feature behavior.
+========================================================== */
+
+
+/* ----------------------------------------------------------
+   DESIGN TOKENS
+---------------------------------------------------------- */
+
+:root{
+  --sf-content-max:1180px;
+  --sf-page-gap:20px;
+
+  --sf-radius-sm:8px;
+  --sf-radius-md:12px;
+  --sf-radius-lg:16px;
+
+  --sf-control-height:38px;
+}
+
+
+/* ----------------------------------------------------------
+   GLOBAL BOX MODEL
+---------------------------------------------------------- */
+
+*,
+*::before,
+*::after{
+  box-sizing:border-box;
+}
+
+
+/* ----------------------------------------------------------
+   MAIN APP PAGES
+---------------------------------------------------------- */
+
+main{
+  min-width:0;
+}
+
+main .page{
+  min-width:0;
+  width:100%;
+}
+
+
+/*
+Standard app page headings.
+
+Home stays intentionally larger because it is the main
+dashboard hero.
+*/
+
+main .page:not(#homePro) > h1,
+main .page:not(#homePro) > header h1,
+main .page:not(#homePro) [class*="header"] > h1:first-child{
+  font-size:28px !important;
+  line-height:1.15 !important;
+  font-weight:650 !important;
+  letter-spacing:-0.025em !important;
+}
+
+
+/* Home hero stays prominent */
+
+#homePro h1{
+  letter-spacing:-0.035em;
+}
+
+
+/* ----------------------------------------------------------
+   TYPOGRAPHY
+---------------------------------------------------------- */
+
+main .page h2{
+  line-height:1.25;
+  letter-spacing:-0.018em;
+}
+
+main .page h3{
+  line-height:1.3;
+}
+
+main .page p{
+  line-height:1.55;
+}
+
+
+/* ----------------------------------------------------------
+   FORM CONTROLS
+---------------------------------------------------------- */
+
+main .page input:not([type="checkbox"]):not([type="radio"]),
+main .page select,
+main .page textarea{
+  max-width:100%;
+}
+
+
+/*
+Do not enlarge actual checkbox artwork.
+Its LABEL is the usable click target.
+*/
+
+main .page label:has(input[type="checkbox"]),
+main .page label:has(input[type="radio"]){
+  min-height:36px;
+  display:inline-flex;
+  align-items:center;
+}
+
+
+/* ----------------------------------------------------------
+   BUTTON CONSISTENCY
+---------------------------------------------------------- */
+
+main .page button{
+  font-family:inherit;
+}
+
+
+/*
+Avoid touching icon-only buttons and specialized controls.
+*/
+
+main .page button:not(.sf25-icon):not([class*="icon"]){
+  line-height:1.2;
+}
+
+
+/* ----------------------------------------------------------
+   CARDS / PANELS
+---------------------------------------------------------- */
+
+main .page .card,
+main .page [class*="-card"],
+main .page [class*="_card"]{
+  min-width:0;
+}
+
+
+/* ----------------------------------------------------------
+   DEGREE PLANNER OVERFLOW FIX
+---------------------------------------------------------- */
+
+#degree{
+  min-width:0 !important;
+  max-width:100% !important;
+  overflow-x:hidden !important;
+}
+
+#degree > *{
+  max-width:100%;
+}
+
+
+/*
+Wide degree tables/grids should scroll INSIDE their own area,
+never expand the entire application.
+*/
+
+#degree table{
+  max-width:100%;
+}
+
+#degree .table-container,
+#degree .table-wrapper,
+#degree [class*="table-wrap"],
+#degree [class*="table-container"]{
+  width:100%;
+  max-width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+
+
+/*
+Fallback for legacy degree tables that have no wrapper.
+*/
+
+#degree table{
+  display:block;
+  width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+
+
+/* Images / charts can never push page width */
+
+#degree img,
+#degree canvas,
+#degree svg{
+  max-width:100%;
+}
+
+
+/* Grid children are allowed to shrink */
+
+#degree [class*="grid"] > *,
+#degree [class*="row"] > *{
+  min-width:0;
+}
+
+
+/* ----------------------------------------------------------
+   INBOX
+---------------------------------------------------------- */
+
+#smartInbox{
+  min-width:0;
+}
+
+#smartInbox h1{
+  font-size:28px !important;
+}
+
+
+/* ----------------------------------------------------------
+   PRO PAGES
+---------------------------------------------------------- */
+
+#tasksPro,
+#calendarPro,
+#todayPro,
+#courseHub,
+#smartSchedule,
+#knowledgeBase,
+#examMode,
+#smartInbox{
+  min-width:0;
+}
+
+
+/* ----------------------------------------------------------
+   SIDEBAR
+---------------------------------------------------------- */
+
+aside{
+  scrollbar-width:thin;
+}
+
+aside button,
+aside a{
+  text-overflow:ellipsis;
+}
+
+
+/* ----------------------------------------------------------
+   SCROLLBARS
+---------------------------------------------------------- */
+
+main *{
+  scrollbar-width:thin;
+}
+
+
+/* ----------------------------------------------------------
+   FLOATING CONTROLS
+---------------------------------------------------------- */
+
+#sf19Button,
+#sf25Button{
+  flex-shrink:0;
+}
+
+
+/* ----------------------------------------------------------
+   MOBILE / TABLET SAFETY
+---------------------------------------------------------- */
+
+@media(max-width:900px){
+
+  main .page{
+    max-width:100%;
+  }
+
+  #degree{
+    overflow-x:hidden !important;
+  }
+
+}
+
+
+@media(max-width:600px){
+
+  main .page:not(#homePro) > h1,
+  main .page:not(#homePro) > header h1,
+  main .page:not(#homePro) [class*="header"] > h1:first-child{
+    font-size:26px !important;
+  }
+
+  #homePro h1{
+    font-size:34px !important;
+  }
+
+  main .page input:not([type="checkbox"]):not([type="radio"]),
+  main .page select,
+  main .page textarea{
+    width:100%;
+  }
+
+}
+
+
+/* ----------------------------------------------------------
+   ACCESSIBILITY
+---------------------------------------------------------- */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible{
+  outline:2px solid currentColor;
+  outline-offset:2px;
+}
+
+
+/* ----------------------------------------------------------
+   REDUCED MOTION
+---------------------------------------------------------- */
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    scroll-behavior:auto !important;
+    transition-duration:.01ms !important;
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+  }
+
+}
+
+
+
+/* ==========================================================
+   PHASE 4B.1 — DEGREE PLANNER GRID FIX
+========================================================== */
+
+#degree .degree-stats{
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(
+        min(140px,100%),
+        1fr
+      )
+    ) !important;
+
+  overflow:visible !important;
+}
+
+#degree .degree-stats > .stat{
+  width:auto !important;
+  min-width:0 !important;
+  max-width:100% !important;
+}
+
+#degree .degree-stats > .stat > *{
+  min-width:0 !important;
+  max-width:100% !important;
+}
+
+#degree .degree-stats h2,
+#degree .degree-stats p{
+  overflow-wrap:anywhere;
+}
+
+
+/* Narrow layouts */
+
+@media(max-width:700px){
+
+  #degree .degree-stats{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr))
+      !important;
+  }
+
+}
+
+@media(max-width:420px){
+
+  #degree .degree-stats{
+    grid-template-columns:
+      1fr
+      !important;
+  }
+
+}
+
+
+/* ==========================================================
+   PHASE 4C.2 — LOGOUT SIDEBAR FIX
+========================================================== */
+
+aside .logout{
+  position:static !important;
+
+  top:auto !important;
+  right:auto !important;
+  bottom:auto !important;
+  left:auto !important;
+
+  width:100% !important;
+  max-width:100% !important;
+
+  margin-top:8px !important;
+
+  flex-shrink:0 !important;
+}
+
+
+
+/* ==========================================================
+   PHASE 4C.3 — FINAL SIDEBAR POLISH
+========================================================== */
+
+body.sf-final-sidebar aside nav{
+  min-width:0;
+}
+
+
+/* Consistent visible nav rows */
+
+body.sf-final-sidebar aside nav [data-page]{
+  min-width:0;
+}
+
+
+/* Logout stays in normal document flow */
+
+body.sf-final-sidebar aside .logout{
+  position:static !important;
+
+  top:auto !important;
+  right:auto !important;
+  bottom:auto !important;
+  left:auto !important;
+
+  width:100% !important;
+  max-width:100% !important;
+
+  margin-top:8px !important;
+}
+
+
+/* Never expose superseded navigation */
+
+body.sf-final-sidebar aside [data-page="dashboard"],
+body.sf-final-sidebar aside [data-page="tasks"],
+body.sf-final-sidebar aside [data-page="planner"],
+body.sf-final-sidebar aside [data-page="calendar"],
+body.sf-final-sidebar aside [data-page="overview"]{
+  display:none !important;
+}

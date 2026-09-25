@@ -1,0 +1,1557 @@
+
+/* =========================================================
+   STUDYFLOW V18
+   MONOCHROME DESIGN SYSTEM
+========================================================= */
+
+:root{
+
+--sf-font:
+-apple-system,
+BlinkMacSystemFont,
+"Segoe UI",
+Inter,
+Roboto,
+Helvetica,
+Arial,
+sans-serif;
+
+--sf-radius-xs:8px;
+--sf-radius-sm:10px;
+--sf-radius:14px;
+--sf-radius-lg:18px;
+--sf-radius-xl:24px;
+
+--sf-transition:
+150ms ease;
+
+}
+
+
+/* =========================================================
+   DARK THEME
+========================================================= */
+
+html[data-sf-theme="dark"]{
+
+color-scheme:dark;
+
+--sf-bg:#212121;
+
+--sf-sidebar:#171717;
+
+--sf-surface:#2f2f2f;
+
+--sf-surface-2:#272727;
+
+--sf-surface-3:#383838;
+
+--sf-hover:#353535;
+
+--sf-input:#2f2f2f;
+
+--sf-text:#ececec;
+
+--sf-text-2:#b4b4b4;
+
+--sf-muted:#8e8e8e;
+
+--sf-border:#404040;
+
+--sf-border-soft:#343434;
+
+--sf-accent:#ffffff;
+
+--sf-accent-text:#000000;
+
+--sf-danger:#ff8585;
+
+--sf-success:#b6e7c4;
+
+--sf-warning:#e5d29c;
+
+--sf-shadow:
+0 1px 2px rgba(0,0,0,.14),
+0 8px 24px rgba(0,0,0,.12);
+
+}
+
+
+/* =========================================================
+   LIGHT THEME
+========================================================= */
+
+html[data-sf-theme="light"]{
+
+color-scheme:light;
+
+--sf-bg:#ffffff;
+
+--sf-sidebar:#f9f9f9;
+
+--sf-surface:#ffffff;
+
+--sf-surface-2:#f7f7f8;
+
+--sf-surface-3:#ececec;
+
+--sf-hover:#f2f2f2;
+
+--sf-input:#ffffff;
+
+--sf-text:#0d0d0d;
+
+--sf-text-2:#424242;
+
+--sf-muted:#6f6f6f;
+
+--sf-border:#dedede;
+
+--sf-border-soft:#ececec;
+
+--sf-accent:#0d0d0d;
+
+--sf-accent-text:#ffffff;
+
+--sf-danger:#b42318;
+
+--sf-success:#16794b;
+
+--sf-warning:#8a6516;
+
+--sf-shadow:
+0 1px 2px rgba(0,0,0,.04),
+0 6px 18px rgba(0,0,0,.04);
+
+}
+
+
+/* =========================================================
+   BASE RESET
+========================================================= */
+
+html,
+body{
+
+font-family:var(--sf-font) !important;
+
+background:var(--sf-bg) !important;
+
+color:var(--sf-text) !important;
+
+}
+
+
+body{
+
+background-image:none !important;
+
+}
+
+
+body::before,
+body::after{
+
+display:none !important;
+
+}
+
+
+/* kill old glow backgrounds */
+
+.sf-ambient,
+.sf-ambient-one,
+.sf-ambient-two,
+.sf-ambient-three,
+.ambient,
+.glow,
+.bg-glow{
+
+display:none !important;
+
+}
+
+
+/* =========================================================
+   TEXT
+========================================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+
+color:var(--sf-text) !important;
+
+font-family:var(--sf-font) !important;
+
+letter-spacing:-.025em !important;
+
+}
+
+
+p,
+small,
+label,
+span{
+
+font-family:var(--sf-font);
+
+}
+
+
+.eyebrow{
+
+color:var(--sf-muted) !important;
+
+font-weight:600 !important;
+
+letter-spacing:.08em !important;
+
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+aside,
+.sidebar,
+#sidebar{
+
+background:var(--sf-sidebar) !important;
+
+background-image:none !important;
+
+border-right:
+1px solid var(--sf-border-soft) !important;
+
+box-shadow:none !important;
+
+backdrop-filter:none !important;
+
+}
+
+
+aside::before,
+aside::after,
+.sidebar::before,
+.sidebar::after{
+
+display:none !important;
+
+}
+
+
+.nav{
+
+position:relative;
+
+display:flex !important;
+
+align-items:center !important;
+
+gap:10px !important;
+
+width:100% !important;
+
+min-height:38px !important;
+
+padding:8px 10px !important;
+
+margin:1px 0 !important;
+
+border-radius:9px !important;
+
+border:0 !important;
+
+background:transparent !important;
+
+box-shadow:none !important;
+
+color:var(--sf-text-2) !important;
+
+font-size:13px !important;
+
+font-weight:500 !important;
+
+text-align:left !important;
+
+transition:
+background var(--sf-transition),
+color var(--sf-transition) !important;
+
+}
+
+
+.nav:hover{
+
+background:var(--sf-hover) !important;
+
+color:var(--sf-text) !important;
+
+transform:none !important;
+
+}
+
+
+.nav.active{
+
+background:var(--sf-hover) !important;
+
+color:var(--sf-text) !important;
+
+font-weight:600 !important;
+
+box-shadow:none !important;
+
+}
+
+
+.nav::before,
+.nav::after{
+
+display:none !important;
+
+}
+
+
+/* remove colorful NEW badges */
+
+.tf-new-badge,
+.sf14-new,
+.sf15-new,
+.sf16-new,
+.sf17-new{
+
+margin-left:auto !important;
+
+padding:2px 5px !important;
+
+border-radius:5px !important;
+
+background:var(--sf-surface-3) !important;
+
+color:var(--sf-muted) !important;
+
+font-size:7px !important;
+
+font-weight:600 !important;
+
+}
+
+
+/* =========================================================
+   MAIN AREA
+========================================================= */
+
+main{
+
+background:var(--sf-bg) !important;
+
+}
+
+
+.page{
+
+background:transparent !important;
+
+}
+
+
+.page::before,
+.page::after{
+
+display:none !important;
+
+}
+
+
+/* =========================================================
+   GENERIC CARDS / PANELS
+========================================================= */
+
+.panel,
+.card,
+.widget,
+
+.tf-summary-card,
+.sf14-card,
+.sf14-mini-card,
+.sf14-course-sidebar,
+.sf14-course-hero,
+.sf14-course-stat,
+
+.sf15-stat,
+.sf15-control,
+.sf15-day,
+.sf15-card,
+
+.sf16-sidebar,
+.sf16-main,
+.sf16-upload,
+
+.sf17-sidebar,
+.sf17-empty,
+.sf17-hero,
+.sf17-metric,
+.sf17-readiness,
+.sf17-card{
+
+background:var(--sf-surface) !important;
+
+background-image:none !important;
+
+border:
+1px solid var(--sf-border-soft) !important;
+
+box-shadow:none !important;
+
+backdrop-filter:none !important;
+
+color:var(--sf-text) !important;
+
+}
+
+
+/* remove internal decorative gradients */
+
+.panel::before,
+.panel::after,
+.card::before,
+.card::after,
+
+.tf-summary-card::before,
+.tf-summary-card::after,
+
+.sf14-card::before,
+.sf14-card::after,
+
+.sf15-card::before,
+.sf15-card::after,
+
+.sf16-main::before,
+.sf16-main::after,
+
+.sf17-card::before,
+.sf17-card::after{
+
+display:none !important;
+
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+button{
+
+font-family:var(--sf-font) !important;
+
+border-radius:10px !important;
+
+transition:
+background var(--sf-transition),
+border-color var(--sf-transition),
+opacity var(--sf-transition) !important;
+
+}
+
+
+button:not(.nav):not(.secondary):not(.sf14-tab):not(.sf14-course-item):not(.sf17-exam-item):not(.sf17-mastery button):not(.sf16-tool){
+
+background:var(--sf-accent) !important;
+
+background-image:none !important;
+
+color:var(--sf-accent-text) !important;
+
+border:
+1px solid var(--sf-accent) !important;
+
+box-shadow:none !important;
+
+font-weight:600 !important;
+
+}
+
+
+button:not(.nav):hover{
+
+transform:none !important;
+
+filter:none !important;
+
+}
+
+
+button:not(.nav):not(.secondary):hover{
+
+opacity:.86 !important;
+
+}
+
+
+button.secondary{
+
+background:transparent !important;
+
+background-image:none !important;
+
+color:var(--sf-text) !important;
+
+border:
+1px solid var(--sf-border) !important;
+
+box-shadow:none !important;
+
+}
+
+
+button.secondary:hover{
+
+background:var(--sf-hover) !important;
+
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+input,
+textarea,
+select{
+
+font-family:var(--sf-font) !important;
+
+background:var(--sf-input) !important;
+
+background-image:none !important;
+
+color:var(--sf-text) !important;
+
+border:
+1px solid var(--sf-border) !important;
+
+border-radius:10px !important;
+
+box-shadow:none !important;
+
+outline:none !important;
+
+}
+
+
+input::placeholder,
+textarea::placeholder{
+
+color:var(--sf-muted) !important;
+
+}
+
+
+input:focus,
+textarea:focus,
+select:focus{
+
+border-color:var(--sf-text-2) !important;
+
+box-shadow:
+0 0 0 1px var(--sf-text-2) !important;
+
+}
+
+
+/* =========================================================
+   AUTH / LOGIN
+========================================================= */
+
+#authScreen,
+.auth-screen{
+
+background:var(--sf-bg) !important;
+
+background-image:none !important;
+
+color:var(--sf-text) !important;
+
+}
+
+
+#authScreen::before,
+#authScreen::after,
+.auth-screen::before,
+.auth-screen::after{
+
+display:none !important;
+
+}
+
+
+#authScreen .panel,
+#authScreen .card,
+.auth-screen .panel,
+.auth-screen .card{
+
+background:var(--sf-surface) !important;
+
+border:
+1px solid var(--sf-border-soft) !important;
+
+box-shadow:var(--sf-shadow) !important;
+
+}
+
+
+#authScreen input,
+#authScreen textarea,
+#authScreen select,
+.auth-screen input,
+.auth-screen textarea,
+.auth-screen select{
+
+background:var(--sf-input) !important;
+
+color:var(--sf-text) !important;
+
+}
+
+
+/* =========================================================
+   TASKS PRO
+========================================================= */
+
+.tf-column{
+
+background:var(--sf-surface-2) !important;
+
+border:
+1px solid var(--sf-border-soft) !important;
+
+}
+
+
+.tf-column.drag-over{
+
+background:var(--sf-hover) !important;
+
+border-color:var(--sf-border) !important;
+
+}
+
+
+.tf-task{
+
+background:var(--sf-surface) !important;
+
+background-image:none !important;
+
+border:
+1px solid var(--sf-border-soft) !important;
+
+box-shadow:none !important;
+
+}
+
+
+.tf-task:hover{
+
+border-color:var(--sf-border) !important;
+
+transform:none !important;
+
+}
+
+
+.tf-task-title{
+
+color:var(--sf-text) !important;
+
+}
+
+
+.tf-task-course{
+
+background:var(--sf-surface-2) !important;
+
+color:var(--sf-text-2) !important;
+
+}
+
+
+.tf-task-date{
+
+color:var(--sf-muted) !important;
+
+}
+
+
+.tf-status-dot.todo,
+.tf-status-dot.progress,
+.tf-status-dot.done{
+
+background:var(--sf-muted) !important;
+
+box-shadow:none !important;
+
+}
+
+
+.tf-status-dot.done{
+
+background:var(--sf-text) !important;
+
+}
+
+
+.tf-column-count{
+
+background:var(--sf-surface-3) !important;
+
+color:var(--sf-muted) !important;
+
+}
+
+
+.tf-priority.High,
+.tf-priority.Medium,
+.tf-priority.Low{
+
+background:var(--sf-surface-2) !important;
+
+color:var(--sf-text-2) !important;
+
+border:
+1px solid var(--sf-border-soft) !important;
+
+}
+
+
+/* =========================================================
+   TASK DRAWER
+========================================================= */
+
+#tfDrawerBackdrop,
+#sf15Backdrop,
+#sf17Backdrop{
+
+background:
+rgba(0,0,0,.40) !important;
+
+backdrop-filter:blur(2px) !important;
+
+}
+
+
+#tfTaskDrawer,
+#sf15Drawer,
+#sf17Drawer{
+
+background:var(--sf-surface) !important;
+
+background-image:none !important;
+
+border-left:
+1px solid var(--sf-border) !important;
+
+box-shadow:
+-12px 0 35px rgba(0,0,0,.08) !important;
+
+}
+
+
+/* =========================================================
+   CALENDAR
+========================================================= */
+
+.tf-calendar-shell{
+
+background:var(--sf-surface) !important;
+
+border:
+1px solid var(--sf-border-soft) !important;
+
+}
+
+
+.tf-calendar-top,
+.tf-weekdays{
+
+background:var(--sf-surface) !important;
+
+border-color:
+var(--sf-border-soft) !important;
+
+}
+
+
+.tf-day{
+
+background:var(--sf-surface) !important;
+
+border-color:
+var(--sf-border-soft) !important;
+
+}
+
+
+.tf-day:hover,
+.tf-day.drag-over,
+.tf-day.today{
+
+background:var(--sf-hover) !important;
+
+}
+
+
+.tf-day.today .tf-day-number{
+
+background:var(--sf-accent) !important;
+
+color:var(--sf-accent-text) !important;
+
+box-shadow:none !important;
+
+}
+
+
+.tf-calendar-event,
+.tf-calendar-event.high{
+
+background:var(--sf-surface-2) !important;
+
+border:
+1px solid var(--sf-border-soft) !important;
+
+color:var(--sf-text-2) !important;
+
+}
+
+
+/* =========================================================
+   TODAY
+========================================================= */
+
+.sf14-today-hero{
+
+background:var(--sf-surface) !important;
+
+background-image:none !important;
+
+border:
+1px solid var(--sf-border-soft) !important;
+
+box-shadow:none !important;
+
+}
+
+
+.sf14-today-hero::after{
+
+display:none !important;
+
+}
+
+
+.sf14-date{
+
+color:var(--sf-muted) !important;
+
+}
+
+
+.sf14-greeting,
+.sf14-greeting span{
+
+color:var(--sf-text) !important;
+
+background:none !important;
+
+-webkit-text-fill-color:initial !important;
+
+}
+
+
+.sf14-hero-text{
+
+color:var(--sf-text-2) !important;
+
+}
+
+
+.sf14-today-stat{
+
+background:var(--sf-surface-2) !important;
+
+border:
+1px solid var(--sf-border-soft) !important;
+
+backdrop-filter:none !important;
+
+}
+
+
+.sf14-today-stat strong{
+
+color:var(--sf-text) !important;
+
+}
+
+
+.sf14-task-row,
+.sf14-plan-block,
+.sf14-week-day,
+.sf14-ai-plan{
+
+background:var(--sf-surface-2) !important;
+
+background-image:none !important;
+
+border:
+1px solid var(--sf-border-soft) !important;
+
+}
+
+
+.sf14-task-row:hover{
+
+background:var(--sf-hover) !important;
+
+transform:none !important;
+
+}
+
+
+.sf14-task-priority.High,
+.sf14-task-priority.Medium,
+.sf14-task-priority.Low{
+
+background:var(--sf-muted) !important;
+
+box-shadow:none !important;
+
+}
+
+
+/* =========================================================
+   COURSE HUB
+========================================================= */
+
+.sf14-course-item{
+
+background:transparent !important;
+
+color:var(--sf-text-2) !important;
+
+}
+
+
+.sf14-course-item.active{
+
+background:var(--sf-hover) !important;
+
+background-image:none !important;
+
+border:
+1px solid var(--sf-border-soft) !important;
+
+color:var(--sf-text) !important;
+
+}
+
+
+.sf14-course-icon{
+
+background:var(--sf-surface-2) !important;
+
+}
+
+
+.sf14-course-code{
+
+color:var(--sf-muted) !important;
+
+}
+
+
+.sf14-course-hero{
+
+background:var(--sf-surface) !important;
+
+}
+
+
+.sf14-tabs{
+
+background:var(--sf-surface-2) !important;
+
+border:
+1px solid var(--sf-border-soft) !important;
+
+}
+
+
+.sf14-tab{
+
+color:var(--sf-muted) !important;
+
+}
+
+
+.sf14-tab.active{
+
+background:var(--sf-surface) !important;
+
+border:
+1px solid var(--sf-border) !important;
+
+color:var(--sf-text) !important;
+
+}
+
+
+.sf14-course-ai{
+
+background:var(--sf-surface) !important;
+
+background-image:none !important;
+
+border:
+1px solid var(--sf-border-soft) !important;
+
+}
+
+
+.sf14-course-ai-output{
+
+background:var(--sf-surface-2) !important;
+
+color:var(--sf-text-2) !important;
+
+}
+
+
+/* =========================================================
+   SMART SCHEDULE
+========================================================= */
+
+.sf15-control{
+
+background:var(--sf-surface) !important;
+
+}
+
+
+.sf15-day.today{
+
+background:var(--sf-hover) !important;
+
+border-color:var(--sf-border) !important;
+
+}
+
+
+.sf15-block,
+.sf15-block.class,
+.sf15-block.work,
+.sf15-block.study,
+.sf15-block.personal{
+
+background:var(--sf-surface) !important;
+
+border:
+1px solid var(--sf-border-soft) !important;
+
+}
+
+
+.sf15-block:hover{
+
+border-color:var(--sf-border) !important;
+
+transform:none !important;
+
+}
+
+
+.sf15-ai-tag{
+
+background:var(--sf-surface-3) !important;
+
+color:var(--sf-muted) !important;
+
+}
+
+
+.sf15-load-fill{
+
+background:var(--sf-text) !important;
+
+}
+
+
+.sf15-coach{
+
+background:var(--sf-surface-2) !important;
+
+background-image:none !important;
+
+color:var(--sf-text-2) !important;
+
+}
+
+
+/* =========================================================
+   KNOWLEDGE BASE
+========================================================= */
+
+.sf16-drop{
+
+background:var(--sf-surface-2) !important;
+
+border:
+1px dashed var(--sf-border) !important;
+
+}
+
+
+.sf16-drop:hover{
+
+background:var(--sf-hover) !important;
+
+}
+
+
+.sf16-file{
+
+background:transparent !important;
+
+border:
+1px solid transparent !important;
+
+}
+
+
+.sf16-file:hover{
+
+background:var(--sf-hover) !important;
+
+}
+
+
+.sf16-file.active{
+
+background:var(--sf-hover) !important;
+
+border:
+1px solid var(--sf-border-soft) !important;
+
+}
+
+
+.sf16-file-icon{
+
+background:var(--sf-surface-2) !important;
+
+}
+
+
+.sf16-tool{
+
+background:var(--sf-surface-2) !important;
+
+border:
+1px solid var(--sf-border-soft) !important;
+
+}
+
+
+.sf16-tool:hover{
+
+background:var(--sf-hover) !important;
+
+border-color:var(--sf-border) !important;
+
+transform:none !important;
+
+}
+
+
+.sf16-result{
+
+background:var(--sf-surface-2) !important;
+
+color:var(--sf-text-2) !important;
+
+}
+
+
+/* =========================================================
+   EXAM MODE
+========================================================= */
+
+.sf17-exam-item{
+
+background:transparent !important;
+
+color:var(--sf-text-2) !important;
+
+}
+
+
+.sf17-exam-item:hover{
+
+background:var(--sf-hover) !important;
+
+}
+
+
+.sf17-exam-item.active{
+
+background:var(--sf-hover) !important;
+
+background-image:none !important;
+
+border:
+1px solid var(--sf-border-soft) !important;
+
+color:var(--sf-text) !important;
+
+}
+
+
+.sf17-hero{
+
+background:var(--sf-surface) !important;
+
+background-image:none !important;
+
+}
+
+
+.sf17-course{
+
+color:var(--sf-muted) !important;
+
+}
+
+
+.sf17-countdown strong{
+
+color:var(--sf-text) !important;
+
+}
+
+
+.sf17-fill{
+
+background:var(--sf-text) !important;
+
+box-shadow:none !important;
+
+}
+
+
+.sf17-topic,
+.sf17-plan-row,
+.sf17-score{
+
+background:var(--sf-surface-2) !important;
+
+border:
+1px solid var(--sf-border-soft) !important;
+
+}
+
+
+.sf17-mastery button{
+
+background:var(--sf-surface-2) !important;
+
+border:
+1px solid var(--sf-border-soft) !important;
+
+color:var(--sf-muted) !important;
+
+}
+
+
+.sf17-mastery button.active{
+
+background:var(--sf-text) !important;
+
+border-color:var(--sf-text) !important;
+
+color:var(--sf-bg) !important;
+
+}
+
+
+.sf17-ai-output{
+
+background:var(--sf-surface-2) !important;
+
+color:var(--sf-text-2) !important;
+
+}
+
+
+/* =========================================================
+   TABLES
+========================================================= */
+
+table{
+
+border-color:
+var(--sf-border-soft) !important;
+
+}
+
+
+th{
+
+background:
+var(--sf-surface-2) !important;
+
+color:
+var(--sf-muted) !important;
+
+}
+
+
+td{
+
+color:
+var(--sf-text-2) !important;
+
+border-color:
+var(--sf-border-soft) !important;
+
+}
+
+
+/* =========================================================
+   MODALS
+========================================================= */
+
+.modal,
+.modal-content,
+.dialog,
+.popup{
+
+background:
+var(--sf-surface) !important;
+
+background-image:none !important;
+
+border:
+1px solid var(--sf-border) !important;
+
+box-shadow:
+var(--sf-shadow) !important;
+
+color:
+var(--sf-text) !important;
+
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+*{
+
+scrollbar-width:thin;
+
+scrollbar-color:
+var(--sf-border)
+transparent;
+
+}
+
+
+*::-webkit-scrollbar{
+
+width:7px;
+height:7px;
+
+}
+
+
+*::-webkit-scrollbar-track{
+
+background:transparent;
+
+}
+
+
+*::-webkit-scrollbar-thumb{
+
+background:
+var(--sf-border);
+
+border-radius:999px;
+
+}
+
+
+/* =========================================================
+   THEME SWITCHER
+========================================================= */
+
+#sf18ThemeSwitcher{
+
+margin-top:auto;
+
+padding:10px;
+
+border-top:
+1px solid var(--sf-border-soft);
+
+}
+
+
+.sf18-theme-label{
+
+margin-bottom:7px;
+
+font-size:9px;
+
+font-weight:600;
+
+color:var(--sf-muted);
+
+}
+
+
+.sf18-theme-buttons{
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:4px;
+
+padding:3px;
+
+background:
+var(--sf-surface-2);
+
+border:
+1px solid var(--sf-border-soft);
+
+border-radius:10px;
+
+}
+
+
+.sf18-theme-button{
+
+min-height:29px !important;
+
+padding:5px !important;
+
+border:0 !important;
+
+border-radius:7px !important;
+
+background:transparent !important;
+
+color:var(--sf-muted) !important;
+
+box-shadow:none !important;
+
+font-size:8px !important;
+
+font-weight:600 !important;
+
+}
+
+
+.sf18-theme-button:hover{
+
+background:
+var(--sf-hover) !important;
+
+}
+
+
+.sf18-theme-button.active{
+
+background:
+var(--sf-surface) !important;
+
+color:
+var(--sf-text) !important;
+
+box-shadow:
+0 1px 2px rgba(0,0,0,.08) !important;
+
+}
+
+
+/* =========================================================
+   GLOBAL DETAIL CLEANUP
+========================================================= */
+
+.tf-page-header h1,
+.sf14-head h1,
+.sf15-head h1,
+.sf16-head h1,
+.sf17-head h1{
+
+font-size:
+clamp(28px,3vw,36px) !important;
+
+font-weight:650 !important;
+
+letter-spacing:-.035em !important;
+
+}
+
+
+.tf-page-subtitle,
+.sf14-subtitle,
+.sf15-sub,
+.sf16-sub,
+.sf17-sub{
+
+color:
+var(--sf-muted) !important;
+
+}
+
+
+/* no neon shadows anywhere */
+
+[class*="sf"],
+[class*="tf"]{
+
+text-shadow:none !important;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:700px){
+
+.tf-page-header h1,
+.sf14-head h1,
+.sf15-head h1,
+.sf16-head h1,
+.sf17-head h1{
+
+font-size:28px !important;
+
+}
+
+}

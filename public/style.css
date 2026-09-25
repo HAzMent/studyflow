@@ -3093,3 +3093,84 @@ text-decoration:none;
 text-decoration:underline;
 }
 
+
+
+/* =========================================================
+   STUDYFLOW SAFE INTERACTION MODE
+========================================================= */
+
+.hidden{
+display:none !important;
+}
+
+/* Nothing decorative may block mouse/keyboard input */
+
+body::before,
+body::after,
+.sf-ambient,
+.sf-ambient-one,
+.sf-ambient-two,
+.sf-ambient-three{
+pointer-events:none !important;
+}
+
+/* Auth screen */
+
+#authScreen,
+.auth-screen{
+pointer-events:auto !important;
+z-index:100 !important;
+}
+
+#authScreen input,
+#authScreen textarea,
+#authScreen select,
+#authScreen button,
+#authScreen a,
+.auth-screen input,
+.auth-screen textarea,
+.auth-screen select,
+.auth-screen button,
+.auth-screen a{
+pointer-events:auto !important;
+}
+
+#authScreen input,
+#authScreen textarea,
+.auth-screen input,
+.auth-screen textarea{
+user-select:text !important;
+-webkit-user-select:text !important;
+cursor:text !important;
+}
+
+/* Remove premium overlays left in DOM */
+
+#sfCommandCenter,
+#sfCustomizeHome,
+.sf-mobile-dock,
+#premiumTopbar,
+#sfToastStack,
+#sfPageLoader{
+display:none !important;
+pointer-events:none !important;
+}
+
+/* No floating + button while logged out */
+
+body:has(#authScreen:not(.hidden)) #quickAddButton,
+body:has(#authScreen:not(.hidden)) #quickAddMenu,
+body:has(.auth-screen:not(.hidden)) #quickAddButton,
+body:has(.auth-screen:not(.hidden)) #quickAddMenu{
+display:none !important;
+}
+
+/* Make standard app controls explicitly clickable */
+
+button,
+input,
+textarea,
+select,
+a{
+pointer-events:auto;
+}

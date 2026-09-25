@@ -1,4 +1,4 @@
-const CACHE = "studyflow-v3";
+const CACHE = "studyflow-phase4c3-final-sidebar";
 
 const STATIC_FILES = [
   "/",
@@ -7,7 +7,9 @@ const STATIC_FILES = [
   "/app.js",
   "/manifest.webmanifest",
   "/studyflow-icon.svg",
-  "/offline.html"
+  "/offline.html",
+  "/taskflow-pro.js",
+  "/taskflow-pro.css"
 ];
 
 self.addEventListener("install", event => {
@@ -43,6 +45,12 @@ self.addEventListener("activate", event => {
 
 
 self.addEventListener("fetch", event => {
+
+  const sfUrl = new URL(event.request.url);
+  if (sfUrl.protocol !== "http:" && sfUrl.protocol !== "https:") {
+    return;
+  }
+
 
   const request = event.request;
 

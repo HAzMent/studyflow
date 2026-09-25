@@ -1,0 +1,578 @@
+
+/* =========================================================
+   STUDYFLOW PART 22 — HOME DASHBOARD
+========================================================= */
+
+.sf22-page{
+padding-bottom:90px;
+}
+
+.sf22-top{
+display:flex;
+justify-content:space-between;
+align-items:flex-end;
+gap:20px;
+margin-bottom:24px;
+}
+
+.sf22-top h1{
+margin:5px 0 0;
+font-size:38px !important;
+font-weight:650 !important;
+letter-spacing:-.045em !important;
+color:var(--sf-text) !important;
+}
+
+.sf22-date{
+font-size:10px;
+font-weight:600;
+letter-spacing:.08em;
+text-transform:uppercase;
+color:var(--sf-muted);
+}
+
+.sf22-sub{
+margin-top:7px;
+font-size:12px;
+line-height:1.55;
+color:var(--sf-muted);
+}
+
+.sf22-top-actions{
+display:flex;
+gap:7px;
+flex-wrap:wrap;
+}
+
+
+/* =========================================================
+   AI BRIEF HERO
+========================================================= */
+
+.sf22-hero{
+display:grid;
+grid-template-columns:minmax(0,1.35fr) minmax(270px,.65fr);
+gap:22px;
+align-items:center;
+
+padding:25px;
+
+border-radius:20px;
+
+background:var(--sf-surface);
+border:1px solid var(--sf-border-soft);
+
+margin-bottom:14px;
+}
+
+.sf22-hero-label{
+font-size:9px;
+font-weight:650;
+letter-spacing:.09em;
+text-transform:uppercase;
+color:var(--sf-muted);
+}
+
+.sf22-hero h2{
+margin:7px 0 8px;
+font-size:25px !important;
+font-weight:650 !important;
+letter-spacing:-.035em !important;
+color:var(--sf-text) !important;
+}
+
+.sf22-hero p{
+max-width:650px;
+font-size:11px;
+line-height:1.65;
+color:var(--sf-text-2);
+}
+
+.sf22-hero-actions{
+display:flex;
+gap:7px;
+margin-top:17px;
+flex-wrap:wrap;
+}
+
+.sf22-hero-right{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+}
+
+.sf22-hero-stat{
+padding:14px;
+
+border-radius:14px;
+
+background:var(--sf-surface-2);
+
+border:1px solid var(--sf-border-soft);
+}
+
+.sf22-hero-stat strong{
+display:block;
+font-size:23px;
+font-weight:650;
+letter-spacing:-.04em;
+color:var(--sf-text);
+}
+
+.sf22-hero-stat span{
+display:block;
+margin-top:4px;
+font-size:8px;
+color:var(--sf-muted);
+}
+
+
+/* =========================================================
+   AI BRIEFING
+========================================================= */
+
+.sf22-ai{
+display:none;
+
+padding:17px;
+margin-bottom:14px;
+
+border-radius:16px;
+
+background:var(--sf-surface);
+
+border:1px solid var(--sf-border-soft);
+}
+
+.sf22-ai.show{
+display:block;
+}
+
+.sf22-ai-head{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+margin-bottom:10px;
+}
+
+.sf22-ai-head strong{
+font-size:11px;
+font-weight:650;
+color:var(--sf-text);
+}
+
+.sf22-ai-head span{
+font-size:8px;
+color:var(--sf-muted);
+}
+
+.sf22-ai-output{
+font-size:10px;
+line-height:1.75;
+white-space:pre-wrap;
+color:var(--sf-text-2);
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.sf22-grid{
+display:grid;
+grid-template-columns:minmax(0,1.2fr) minmax(300px,.8fr);
+gap:14px;
+align-items:start;
+}
+
+.sf22-stack{
+display:grid;
+gap:14px;
+}
+
+.sf22-card{
+padding:18px;
+
+border-radius:17px;
+
+background:var(--sf-surface);
+
+border:1px solid var(--sf-border-soft);
+}
+
+.sf22-card-head{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+margin-bottom:13px;
+}
+
+.sf22-card-head h3{
+margin:0;
+font-size:12px !important;
+font-weight:650 !important;
+color:var(--sf-text) !important;
+}
+
+.sf22-card-head span,
+.sf22-card-head button{
+font-size:8px;
+}
+
+
+/* =========================================================
+   PRIORITIES
+========================================================= */
+
+.sf22-priority-list{
+display:grid;
+gap:6px;
+}
+
+.sf22-task{
+display:grid;
+grid-template-columns:auto minmax(0,1fr) auto;
+gap:10px;
+align-items:center;
+
+padding:10px;
+
+border-radius:11px;
+
+border:1px solid transparent;
+
+cursor:pointer;
+}
+
+.sf22-task:hover{
+background:var(--sf-hover);
+border-color:var(--sf-border-soft);
+}
+
+.sf22-task-dot{
+width:7px;
+height:7px;
+border-radius:50%;
+background:var(--sf-muted);
+}
+
+.sf22-task-dot.high{
+background:var(--sf-text);
+}
+
+.sf22-task-main{
+min-width:0;
+}
+
+.sf22-task-main strong{
+display:block;
+font-size:10px;
+font-weight:600;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+color:var(--sf-text);
+}
+
+.sf22-task-main small{
+display:block;
+margin-top:2px;
+font-size:8px;
+color:var(--sf-muted);
+}
+
+.sf22-task-date{
+font-size:8px;
+white-space:nowrap;
+color:var(--sf-muted);
+}
+
+
+/* =========================================================
+   SCHEDULE
+========================================================= */
+
+.sf22-schedule{
+display:grid;
+gap:7px;
+}
+
+.sf22-schedule-row{
+display:grid;
+grid-template-columns:70px 1fr;
+gap:10px;
+
+padding:9px 0;
+
+border-bottom:1px solid var(--sf-border-soft);
+}
+
+.sf22-schedule-row:last-child{
+border-bottom:0;
+}
+
+.sf22-schedule-time{
+font-size:8px;
+font-weight:600;
+color:var(--sf-muted);
+}
+
+.sf22-schedule-row strong{
+display:block;
+font-size:10px;
+font-weight:600;
+color:var(--sf-text);
+}
+
+.sf22-schedule-row small{
+display:block;
+margin-top:2px;
+font-size:8px;
+color:var(--sf-muted);
+}
+
+
+/* =========================================================
+   EXAM
+========================================================= */
+
+.sf22-exam{
+padding:15px;
+
+border-radius:14px;
+
+background:var(--sf-surface-2);
+
+border:1px solid var(--sf-border-soft);
+}
+
+.sf22-exam-top{
+display:flex;
+justify-content:space-between;
+gap:10px;
+align-items:flex-start;
+}
+
+.sf22-exam-course{
+font-size:8px;
+font-weight:650;
+text-transform:uppercase;
+letter-spacing:.07em;
+color:var(--sf-muted);
+}
+
+.sf22-exam h4{
+margin:5px 0 0;
+font-size:14px;
+font-weight:650;
+color:var(--sf-text);
+}
+
+.sf22-exam-days{
+text-align:right;
+}
+
+.sf22-exam-days strong{
+display:block;
+font-size:24px;
+font-weight:650;
+letter-spacing:-.04em;
+color:var(--sf-text);
+}
+
+.sf22-exam-days span{
+font-size:7px;
+color:var(--sf-muted);
+}
+
+.sf22-progress{
+height:6px;
+margin-top:14px;
+overflow:hidden;
+border-radius:999px;
+background:var(--sf-surface-3);
+}
+
+.sf22-progress-fill{
+height:100%;
+border-radius:inherit;
+background:var(--sf-text);
+}
+
+
+/* =========================================================
+   COURSES
+========================================================= */
+
+.sf22-course-list{
+display:grid;
+gap:5px;
+}
+
+.sf22-course{
+display:grid;
+grid-template-columns:minmax(0,1fr) auto;
+align-items:center;
+gap:12px;
+
+padding:10px;
+
+border-radius:10px;
+
+cursor:pointer;
+}
+
+.sf22-course:hover{
+background:var(--sf-hover);
+}
+
+.sf22-course strong{
+display:block;
+font-size:10px;
+font-weight:600;
+color:var(--sf-text);
+}
+
+.sf22-course small{
+display:block;
+margin-top:2px;
+font-size:8px;
+color:var(--sf-muted);
+}
+
+.sf22-course-grade{
+font-size:11px;
+font-weight:650;
+color:var(--sf-text);
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+========================================================= */
+
+.sf22-quick{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:7px;
+}
+
+.sf22-quick button{
+min-height:58px;
+
+display:flex !important;
+flex-direction:column;
+align-items:flex-start !important;
+justify-content:center;
+
+padding:10px !important;
+
+background:var(--sf-surface-2) !important;
+color:var(--sf-text) !important;
+
+border:1px solid var(--sf-border-soft) !important;
+
+box-shadow:none !important;
+}
+
+.sf22-quick button:hover{
+background:var(--sf-hover) !important;
+opacity:1 !important;
+}
+
+.sf22-quick button span{
+font-size:15px;
+margin-bottom:4px;
+}
+
+.sf22-quick button strong{
+font-size:9px;
+font-weight:600;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.sf22-empty{
+padding:26px 12px;
+
+text-align:center;
+
+border:1px dashed var(--sf-border-soft);
+
+border-radius:12px;
+
+font-size:9px;
+line-height:1.6;
+
+color:var(--sf-muted);
+}
+
+
+/* NAV */
+
+.sf22-new{
+margin-left:auto;
+
+padding:2px 5px;
+
+border-radius:5px;
+
+background:var(--sf-surface-3);
+
+font-size:7px;
+
+color:var(--sf-muted);
+}
+
+
+body:has(#authScreen:not(.hidden))
+.sf22-nav{
+display:none !important;
+}
+
+
+@media(max-width:1000px){
+
+.sf22-hero{
+grid-template-columns:1fr;
+}
+
+.sf22-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:600px){
+
+.sf22-top{
+flex-direction:column;
+align-items:flex-start;
+}
+
+.sf22-top h1{
+font-size:30px !important;
+}
+
+.sf22-top-actions{
+width:100%;
+}
+
+.sf22-top-actions button{
+flex:1;
+}
+
+.sf22-hero{
+padding:18px;
+}
+
+.sf22-hero-right{
+grid-template-columns:1fr 1fr;
+}
+
+}

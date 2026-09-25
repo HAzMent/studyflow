@@ -1,0 +1,370 @@
+
+/* =========================================================
+   STUDYFLOW — FINAL MONOCHROME CLEANUP
+========================================================= */
+
+
+/* ---------- GLOBAL: NO OLD GRADIENT / GLOW ---------- */
+
+html,
+body,
+main,
+.page{
+  background-image:none !important;
+}
+
+body::before,
+body::after,
+main::before,
+main::after,
+.page::before,
+.page::after{
+  display:none !important;
+}
+
+main *,
+.page *{
+  text-shadow:none !important;
+}
+
+
+/* =========================================================
+   HOME — FORCE TRUE BLACK / WHITE
+========================================================= */
+
+body #homePro{
+  background:var(--sf-bg) !important;
+  background-image:none !important;
+}
+
+body #homePro .sf22-top{
+  background:transparent !important;
+  background-image:none !important;
+}
+
+body #homePro .sf22-hero{
+  background:var(--sf-surface) !important;
+  background-image:none !important;
+  border:1px solid var(--sf-border-soft) !important;
+  box-shadow:none !important;
+}
+
+body #homePro .sf22-hero::before,
+body #homePro .sf22-hero::after{
+  display:none !important;
+}
+
+body #homePro .sf22-card{
+  background:var(--sf-surface) !important;
+  background-image:none !important;
+  border:1px solid var(--sf-border-soft) !important;
+  box-shadow:none !important;
+}
+
+body #homePro .sf22-card-head{
+  background:transparent !important;
+  background-image:none !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+
+body #homePro .sf22-hero-stat,
+body #homePro .sf22-exam,
+body #homePro .sf22-quick button{
+  background:var(--sf-surface-2) !important;
+  background-image:none !important;
+  border:1px solid var(--sf-border-soft) !important;
+  box-shadow:none !important;
+}
+
+body #homePro .sf22-task:hover,
+body #homePro .sf22-course:hover{
+  background:var(--sf-hover) !important;
+}
+
+body #homePro .sf22-progress-fill{
+  background:var(--sf-text) !important;
+  background-image:none !important;
+}
+
+
+/* =========================================================
+   ALL NEW MODULES — KILL REMAINING GRADIENTS
+========================================================= */
+
+#todayPro,
+#courseHub,
+#tasksPro,
+#calendarPro,
+#smartSchedule,
+#knowledgeBase,
+#examMode{
+  background:var(--sf-bg) !important;
+  background-image:none !important;
+}
+
+#todayPro *,
+#courseHub *,
+#tasksPro *,
+#calendarPro *,
+#smartSchedule *,
+#knowledgeBase *,
+#examMode *{
+  text-shadow:none !important;
+}
+
+
+/* TODAY */
+
+.sf14-today-hero,
+.sf14-card,
+.sf14-mini-card,
+.sf14-course-hero,
+.sf14-course-sidebar,
+.sf14-course-ai{
+  background:var(--sf-surface) !important;
+  background-image:none !important;
+  box-shadow:none !important;
+}
+
+
+/* TASKS */
+
+.tf-column{
+  background:var(--sf-surface-2) !important;
+  background-image:none !important;
+}
+
+.tf-task{
+  background:var(--sf-surface) !important;
+  background-image:none !important;
+  box-shadow:none !important;
+}
+
+
+/* SCHEDULE */
+
+.sf15-stat,
+.sf15-control,
+.sf15-day,
+.sf15-card,
+.sf15-block{
+  background-image:none !important;
+  box-shadow:none !important;
+}
+
+
+/* KNOWLEDGE */
+
+.sf16-sidebar,
+.sf16-main,
+.sf16-upload,
+.sf16-drop,
+.sf16-tool{
+  background-image:none !important;
+  box-shadow:none !important;
+}
+
+
+/* EXAMS */
+
+.sf17-sidebar,
+.sf17-empty,
+.sf17-hero,
+.sf17-metric,
+.sf17-readiness,
+.sf17-card{
+  background-image:none !important;
+  box-shadow:none !important;
+}
+
+
+/* =========================================================
+   SIDEBAR — GPT-LIKE
+========================================================= */
+
+aside{
+  background:#171717 !important;
+  background-image:none !important;
+  border-right:1px solid #2b2b2b !important;
+  box-shadow:none !important;
+  overflow-y:auto !important;
+  scrollbar-width:thin;
+}
+
+html[data-sf-theme="light"] aside{
+  background:#f9f9f9 !important;
+  border-right:1px solid #ececec !important;
+}
+
+aside .nav{
+  border:0 !important;
+  box-shadow:none !important;
+  background:transparent !important;
+}
+
+aside .nav:hover,
+aside .nav.active{
+  background:var(--sf-hover) !important;
+}
+
+
+/* Search box */
+
+aside .sf21-nav{
+  background:var(--sf-surface-2) !important;
+  border:1px solid var(--sf-border-soft) !important;
+}
+
+
+/* =========================================================
+   HIDE OLD / DUPLICATE UI
+========================================================= */
+
+/* old quick-add button */
+#quickAddButton,
+#premiumQuickAdd,
+.sf-quick-add,
+.quick-add-button,
+.premium-quick-add{
+  display:none !important;
+}
+
+
+/* Old premium top UI if still present */
+
+#premiumTopbar,
+.sf-mobile-dock,
+#sfPageLoader{
+  display:none !important;
+}
+
+
+/* =========================================================
+   COPILOT
+========================================================= */
+
+#sf19Button{
+  width:48px !important;
+  height:48px !important;
+  right:22px !important;
+  bottom:22px !important;
+
+  border-radius:50% !important;
+
+  background:var(--sf-accent) !important;
+  color:var(--sf-accent-text) !important;
+
+  border:1px solid var(--sf-border) !important;
+
+  box-shadow:
+    0 4px 16px rgba(0,0,0,.15) !important;
+}
+
+
+/* =========================================================
+   CLEAN BUTTONS
+========================================================= */
+
+button{
+  box-shadow:none !important;
+}
+
+button:not(.nav):hover{
+  transform:none !important;
+}
+
+
+/* =========================================================
+   MAIN CONTENT WIDTH
+========================================================= */
+
+#homePro,
+#todayPro,
+#courseHub,
+#tasksPro,
+#calendarPro,
+#smartSchedule,
+#knowledgeBase,
+#examMode{
+  width:100%;
+  max-width:1500px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+#authScreen,
+.auth-screen{
+  background:var(--sf-bg) !important;
+  background-image:none !important;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:700px){
+
+  #sf19Button{
+    right:14px !important;
+    bottom:14px !important;
+  }
+
+}
+
+
+/* FINAL FINAL MONOCHROME OVERRIDE */
+
+#homePro,
+#homePro::before,
+#homePro::after,
+#homePro .sf22-top,
+#homePro .sf22-hero,
+#homePro .sf22-hero::before,
+#homePro .sf22-hero::after{
+  background-image:none !important;
+  box-shadow:none !important;
+}
+
+#homePro{
+  background:var(--sf-bg) !important;
+}
+
+#homePro .sf22-hero,
+#homePro .sf22-card{
+  background:var(--sf-surface) !important;
+  border:1px solid var(--sf-border-soft) !important;
+}
+
+
+/* ==========================================
+   FINAL HOME GRADIENT FIX
+========================================== */
+
+#homePro .sf22-hero-stat::before,
+#homePro .sf22-hero-stat::after{
+  content:none !important;
+  display:none !important;
+  background:none !important;
+  background-image:none !important;
+  box-shadow:none !important;
+}
+
+/* Kill any remaining decorative pseudo-elements on Home */
+#homePro .sf22-hero::before,
+#homePro .sf22-hero::after,
+#homePro .sf22-card::before,
+#homePro .sf22-card::after,
+#homePro .sf22-quick button::before,
+#homePro .sf22-quick button::after{
+  content:none !important;
+  display:none !important;
+  background:none !important;
+  background-image:none !important;
+}

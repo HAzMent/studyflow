@@ -1,0 +1,157 @@
+
+/* =========================================================
+   PART 23 — PRODUCT CLEANUP
+========================================================= */
+
+
+/* Hide legacy duplicates */
+
+.nav[data-page="dashboard"],
+.nav[data-page="tasks"],
+.nav[data-page="calendar"]{
+display:none !important;
+}
+
+
+/* Hide all temporary NEW badges */
+
+.tf-new-badge,
+.sf14-new,
+.sf15-new,
+.sf16-new,
+.sf17-new,
+.sf22-new{
+display:none !important;
+}
+
+
+/* Cleaner sidebar */
+
+aside .nav{
+min-height:38px !important;
+margin:1px 0 !important;
+padding:8px 10px !important;
+border-radius:8px !important;
+}
+
+aside .nav.active{
+background:var(--sf-hover) !important;
+font-weight:600 !important;
+}
+
+aside .nav:hover{
+background:var(--sf-hover) !important;
+}
+
+
+/* Search */
+
+.sf21-nav{
+margin-bottom:8px !important;
+border:1px solid var(--sf-border-soft) !important;
+background:var(--sf-surface-2) !important;
+}
+
+.sf21-nav:hover{
+border-color:var(--sf-border) !important;
+}
+
+
+/* Divider before appearance */
+
+#sf18ThemeSwitcher{
+margin-top:14px !important;
+}
+
+
+/* Remove old visual noise */
+
+.premium-badge,
+.beta-badge,
+.pro-badge{
+display:none !important;
+}
+
+
+/* Home gets clean spacing */
+
+#homePro{
+max-width:1500px;
+margin:0 auto;
+}
+
+
+/* Desktop sidebar refinement */
+
+@media(min-width:901px){
+
+aside{
+padding-left:9px !important;
+padding-right:9px !important;
+}
+
+}
+
+
+/* Mobile */
+
+@media(max-width:700px){
+
+.sf21-nav-kbd{
+display:none !important;
+}
+
+}
+
+
+/* ==========================================
+   STUDYFLOW DRAWER VISIBILITY HOTFIX
+   Closed drawers must physically disappear.
+========================================== */
+
+#tfTaskDrawer:not(.open),
+#sf15Drawer:not(.open),
+#sf17Drawer:not(.open),
+#tfDrawerBackdrop:not(.open),
+#sf15Backdrop:not(.open),
+#sf17Backdrop:not(.open){
+  display:none !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+}
+
+#tfTaskDrawer.open,
+#sf15Drawer.open,
+#sf17Drawer.open{
+  display:block !important;
+  visibility:visible !important;
+  pointer-events:auto !important;
+}
+
+#tfDrawerBackdrop.open,
+#sf15Backdrop.open,
+#sf17Backdrop.open{
+  display:block !important;
+  visibility:visible !important;
+  pointer-events:auto !important;
+}
+
+
+/* ==========================================
+   PAGE VISIBILITY COMPATIBILITY FIX
+========================================== */
+
+main .page.active{
+  display:block !important;
+  visibility:visible !important;
+  opacity:1 !important;
+}
+
+main .page.hidden{
+  display:none !important;
+}
+
+/* New StudyFlow pages use hidden/active navigation */
+main .page:not(.hidden).active{
+  display:block !important;
+}

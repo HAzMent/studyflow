@@ -1,5 +1,4 @@
 import express from "express";
-import session from "express-session";
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 import OpenAI from "openai";
@@ -8,6 +7,8 @@ import cloudRouter from "./cloud-routes.js";
 import supabaseAuthRouter from "./auth-routes.js";
 import { createSessionMiddleware } from "./session-config.js";
 import authExtraRouter from "./auth-extra-routes.js";
+import materialRouter from "./material-routes.js";
+import inboxRouter from "./inbox-routes.js";
 
 dotenv.config();
 
@@ -29,20 +30,10 @@ function saveUsers(users) {
   fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
 }
 
-app.use(express.json({ limit: "25mb" }));
+app.use(express.json({ limit: "18mb" }));
 
 app.use(createSessionMiddleware());
 
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET || "studyflow-secret-change-me",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      maxAge: 1000 * 60 * 60 * 24 * 7
-    }
-  })
-);
 
 
 /*
@@ -50,6 +41,8 @@ app.use(
 */
 app.use("/api", supabaseAuthRouter);
 app.use("/api", authExtraRouter);
+app.use("/api", materialRouter);
+app.use("/api", inboxRouter);
 
 app.use("/api/cloud", cloudRouter);
 

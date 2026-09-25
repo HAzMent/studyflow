@@ -1,0 +1,647 @@
+
+/* =========================================================
+   STUDYFLOW PART 13 — TASKS / CALENDAR PRO
+========================================================= */
+
+.tf-page{
+padding-bottom:80px;
+}
+
+.tf-page-header{
+display:flex;
+justify-content:space-between;
+align-items:flex-end;
+gap:20px;
+margin-bottom:22px;
+}
+
+.tf-page-header h1{
+margin:4px 0 0;
+font-size:38px;
+font-weight:900;
+letter-spacing:-.045em;
+color:#fff;
+}
+
+.tf-page-subtitle{
+margin-top:7px;
+font-size:13px;
+color:#8290a7;
+}
+
+.tf-header-actions{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+}
+
+
+/* TOOLBAR */
+
+.tf-toolbar{
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:18px;
+}
+
+.tf-search{
+flex:1;
+min-width:200px;
+position:relative;
+}
+
+.tf-search span{
+position:absolute;
+left:14px;
+top:50%;
+transform:translateY(-50%);
+color:#63728a;
+pointer-events:none;
+}
+
+.tf-search input{
+width:100%;
+height:44px;
+padding-left:39px !important;
+}
+
+.tf-toolbar select{
+width:auto;
+min-width:150px;
+height:44px;
+}
+
+
+/* SUMMARY */
+
+.tf-summary{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+margin-bottom:18px;
+}
+
+.tf-summary-card{
+padding:15px 16px;
+border:1px solid rgba(255,255,255,.065);
+background:rgba(255,255,255,.035);
+border-radius:17px;
+}
+
+.tf-summary-card strong{
+display:block;
+font-size:23px;
+font-weight:900;
+color:#fff;
+letter-spacing:-.04em;
+}
+
+.tf-summary-card span{
+display:block;
+margin-top:3px;
+font-size:10px;
+font-weight:700;
+color:#77869d;
+}
+
+
+/* =========================================================
+   KANBAN
+========================================================= */
+
+.tf-board{
+display:grid;
+grid-template-columns:repeat(3,minmax(260px,1fr));
+gap:13px;
+align-items:start;
+overflow-x:auto;
+padding-bottom:10px;
+}
+
+.tf-column{
+min-height:480px;
+padding:11px;
+border-radius:22px;
+background:rgba(6,11,20,.43);
+border:1px solid rgba(255,255,255,.055);
+}
+
+.tf-column.drag-over{
+border-color:rgba(91,220,255,.35);
+background:rgba(91,220,255,.045);
+}
+
+.tf-column-head{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:5px 5px 13px;
+}
+
+.tf-column-name{
+display:flex;
+align-items:center;
+gap:8px;
+font-size:12px;
+font-weight:850;
+color:#dce4ef;
+}
+
+.tf-status-dot{
+width:8px;
+height:8px;
+border-radius:50%;
+}
+
+.tf-status-dot.todo{
+background:#8996aa;
+}
+
+.tf-status-dot.progress{
+background:#7c6cff;
+box-shadow:0 0 12px rgba(124,108,255,.5);
+}
+
+.tf-status-dot.done{
+background:#39c978;
+box-shadow:0 0 12px rgba(57,201,120,.35);
+}
+
+.tf-column-count{
+display:grid;
+place-items:center;
+min-width:25px;
+height:25px;
+padding:0 7px;
+border-radius:8px;
+background:rgba(255,255,255,.045);
+color:#78869c;
+font-size:10px;
+font-weight:800;
+}
+
+.tf-dropzone{
+min-height:420px;
+}
+
+.tf-task{
+position:relative;
+margin-bottom:8px;
+padding:14px;
+border-radius:17px;
+background:
+linear-gradient(
+160deg,
+rgba(255,255,255,.065),
+rgba(255,255,255,.032)
+);
+border:1px solid rgba(255,255,255,.065);
+box-shadow:0 9px 24px rgba(0,0,0,.13);
+cursor:pointer;
+transition:
+transform .16s ease,
+border-color .16s ease,
+opacity .16s ease;
+}
+
+.tf-task:hover{
+transform:translateY(-2px);
+border-color:rgba(124,92,255,.27);
+}
+
+.tf-task.dragging{
+opacity:.4;
+transform:scale(.98);
+}
+
+.tf-task-top{
+display:flex;
+justify-content:space-between;
+gap:10px;
+align-items:flex-start;
+}
+
+.tf-task-title{
+font-size:12px;
+font-weight:800;
+line-height:1.45;
+color:#edf2fa;
+}
+
+.tf-drag-handle{
+color:#54637a;
+font-size:14px;
+cursor:grab;
+}
+
+.tf-task-course{
+display:inline-flex;
+margin-top:8px;
+padding:4px 7px;
+border-radius:7px;
+background:rgba(124,92,255,.09);
+color:#9daaff;
+font-size:8px;
+font-weight:800;
+}
+
+.tf-task-meta{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:8px;
+margin-top:13px;
+}
+
+.tf-task-date{
+font-size:9px;
+color:#718099;
+}
+
+.tf-priority{
+font-size:8px;
+font-weight:850;
+padding:4px 7px;
+border-radius:999px;
+}
+
+.tf-priority.Low{
+background:rgba(34,197,94,.11);
+color:#81d9a1;
+}
+
+.tf-priority.Medium{
+background:rgba(245,158,11,.11);
+color:#e4b45f;
+}
+
+.tf-priority.High{
+background:rgba(239,68,68,.12);
+color:#ef8e8e;
+}
+
+.tf-empty-column{
+padding:28px 10px;
+text-align:center;
+border:1px dashed rgba(255,255,255,.055);
+border-radius:15px;
+color:#56667e;
+font-size:10px;
+}
+
+
+/* =========================================================
+   TASK DRAWER
+========================================================= */
+
+#tfDrawerBackdrop{
+position:fixed;
+inset:0;
+z-index:28000;
+background:rgba(2,6,12,.52);
+backdrop-filter:blur(7px);
+opacity:0;
+pointer-events:none;
+transition:opacity .2s ease;
+}
+
+#tfDrawerBackdrop.open{
+opacity:1;
+pointer-events:auto;
+}
+
+#tfTaskDrawer{
+position:fixed;
+z-index:28001;
+right:0;
+top:0;
+bottom:0;
+width:min(490px,100vw);
+padding:22px;
+overflow-y:auto;
+
+background:
+linear-gradient(
+180deg,
+rgba(15,22,38,.99),
+rgba(8,13,24,.99)
+);
+
+border-left:1px solid rgba(255,255,255,.075);
+box-shadow:-25px 0 80px rgba(0,0,0,.45);
+
+transform:translateX(102%);
+transition:transform .25s cubic-bezier(.2,.85,.25,1);
+}
+
+#tfTaskDrawer.open{
+transform:none;
+}
+
+.tf-drawer-head{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:28px;
+}
+
+.tf-drawer-head strong{
+font-size:12px;
+color:#8e9cb2;
+letter-spacing:.1em;
+}
+
+.tf-close{
+width:37px !important;
+height:37px !important;
+padding:0 !important;
+background:rgba(255,255,255,.04) !important;
+border:1px solid rgba(255,255,255,.06) !important;
+box-shadow:none !important;
+color:#8290a4 !important;
+font-size:18px !important;
+}
+
+.tf-field{
+margin-bottom:16px;
+}
+
+.tf-field label{
+display:block;
+margin-bottom:7px;
+font-size:10px;
+font-weight:800;
+color:#7c8ba2;
+}
+
+.tf-field input,
+.tf-field select,
+.tf-field textarea{
+width:100%;
+}
+
+.tf-title-input{
+font-size:21px !important;
+font-weight:800 !important;
+letter-spacing:-.025em;
+}
+
+.tf-field textarea{
+min-height:130px;
+resize:vertical;
+}
+
+.tf-two-fields{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.tf-drawer-actions{
+display:flex;
+gap:8px;
+margin-top:23px;
+padding-top:20px;
+border-top:1px solid rgba(255,255,255,.06);
+}
+
+.tf-drawer-actions button{
+flex:1;
+}
+
+.tf-delete{
+background:rgba(239,68,68,.09) !important;
+color:#ef8d8d !important;
+border:1px solid rgba(239,68,68,.12) !important;
+box-shadow:none !important;
+}
+
+
+/* =========================================================
+   CALENDAR PRO
+========================================================= */
+
+.tf-calendar-shell{
+overflow:hidden;
+border-radius:23px;
+background:rgba(7,12,22,.40);
+border:1px solid rgba(255,255,255,.06);
+}
+
+.tf-calendar-top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+padding:15px;
+border-bottom:1px solid rgba(255,255,255,.055);
+}
+
+.tf-calendar-title{
+font-size:17px;
+font-weight:850;
+color:#eff4fb;
+}
+
+.tf-calendar-nav{
+display:flex;
+gap:6px;
+}
+
+.tf-calendar-nav button{
+min-width:38px;
+height:38px;
+padding:0 10px !important;
+background:rgba(255,255,255,.04) !important;
+border:1px solid rgba(255,255,255,.06) !important;
+box-shadow:none !important;
+color:#a4b0c1 !important;
+}
+
+.tf-weekdays{
+display:grid;
+grid-template-columns:repeat(7,1fr);
+background:rgba(255,255,255,.018);
+border-bottom:1px solid rgba(255,255,255,.045);
+}
+
+.tf-weekdays div{
+padding:10px;
+text-align:center;
+font-size:9px;
+font-weight:850;
+letter-spacing:.08em;
+color:#61718a;
+}
+
+.tf-calendar-grid{
+display:grid;
+grid-template-columns:repeat(7,1fr);
+}
+
+.tf-day{
+position:relative;
+min-height:128px;
+padding:8px;
+border-right:1px solid rgba(255,255,255,.04);
+border-bottom:1px solid rgba(255,255,255,.04);
+background:rgba(255,255,255,.01);
+transition:background .15s ease;
+}
+
+.tf-day:hover,
+.tf-day.drag-over{
+background:rgba(124,92,255,.045);
+}
+
+.tf-day.outside{
+opacity:.34;
+}
+
+.tf-day.today{
+background:
+linear-gradient(
+180deg,
+rgba(124,92,255,.07),
+rgba(255,255,255,.008)
+);
+}
+
+.tf-day-number{
+width:25px;
+height:25px;
+display:grid;
+place-items:center;
+border-radius:8px;
+font-size:9px;
+font-weight:800;
+color:#8190a6;
+margin-bottom:5px;
+}
+
+.tf-day.today .tf-day-number{
+background:#755eff;
+color:#fff;
+box-shadow:0 5px 15px rgba(117,94,255,.25);
+}
+
+.tf-calendar-event{
+display:block;
+width:100%;
+margin-top:4px;
+padding:5px 6px;
+overflow:hidden;
+white-space:nowrap;
+text-overflow:ellipsis;
+
+border-radius:7px;
+background:rgba(124,92,255,.11);
+border:1px solid rgba(124,92,255,.08);
+color:#adb7ff;
+font-size:8px;
+font-weight:750;
+
+cursor:grab;
+}
+
+.tf-calendar-event.high{
+background:rgba(239,68,68,.10);
+border-color:rgba(239,68,68,.08);
+color:#ed9b9b;
+}
+
+.tf-calendar-event.done{
+opacity:.45;
+text-decoration:line-through;
+}
+
+
+/* =========================================================
+   NAV
+========================================================= */
+
+.tf-pro-nav{
+position:relative;
+}
+
+.tf-new-badge{
+position:absolute;
+right:9px;
+font-size:7px;
+font-weight:900;
+padding:3px 5px;
+border-radius:5px;
+background:rgba(124,92,255,.14);
+color:#9f91ff;
+}
+
+
+/* AUTH SAFETY */
+
+body:has(#authScreen:not(.hidden)) .tf-pro-nav{
+display:none !important;
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+.tf-summary{
+grid-template-columns:1fr 1fr;
+}
+
+.tf-board{
+grid-template-columns:
+repeat(3,280px);
+}
+
+.tf-day{
+min-height:100px;
+}
+
+}
+
+@media(max-width:650px){
+
+.tf-page-header{
+align-items:flex-start;
+flex-direction:column;
+}
+
+.tf-page-header h1{
+font-size:30px;
+}
+
+.tf-header-actions{
+width:100%;
+}
+
+.tf-header-actions button{
+flex:1;
+}
+
+.tf-toolbar{
+display:grid;
+grid-template-columns:1fr;
+}
+
+.tf-summary{
+grid-template-columns:1fr 1fr;
+}
+
+.tf-calendar-shell{
+overflow-x:auto;
+}
+
+.tf-weekdays,
+.tf-calendar-grid{
+min-width:750px;
+}
+
+.tf-two-fields{
+grid-template-columns:1fr;
+}
+
+}
