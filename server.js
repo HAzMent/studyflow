@@ -6,6 +6,14 @@ import fs from "fs";
 import cloudRouter from "./cloud-routes.js";
 import supabaseAuthRouter from "./auth-routes.js";
 import { createSessionMiddleware } from "./session-config.js";
+import {
+  securityHeaders,
+  loginLimiter,
+  registerLimiter,
+  forgotPasswordLimiter,
+  resetPasswordLimiter
+} from "./security-middleware.js";
+
 import authExtraRouter from "./auth-extra-routes.js";
 import materialRouter from "./material-routes.js";
 import inboxRouter from "./inbox-routes.js";
@@ -15,6 +23,17 @@ dotenv.config();
 const app = express();
 
 app.set("trust proxy", 1);
+
+/* =========================================================
+   PRODUCTION SECURITY
+========================================================= */
+
+app.disable("x-powered-by");
+
+app.use(
+  securityHeaders
+);
+
 const PORT = Number(process.env.PORT) || 3000;
 const USERS_FILE = "./data/users.json";
 
@@ -39,6 +58,31 @@ app.use(createSessionMiddleware());
 /*
   Supabase-backed StudyFlow accounts
 */
+
+/* =========================================================
+   AUTH RATE LIMITS
+========================================================= */
+
+app.use(
+  "/api/login",
+  loginLimiter
+);
+
+app.use(
+  "/api/register",
+  registerLimiter
+);
+
+app.use(
+  "/api/forgot-password",
+  forgotPasswordLimiter
+);
+
+app.use(
+  "/api/reset-password",
+  resetPasswordLimiter
+);
+
 app.use("/api", supabaseAuthRouter);
 app.use("/api", authExtraRouter);
 app.use("/api", materialRouter);
